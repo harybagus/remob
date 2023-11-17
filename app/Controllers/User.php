@@ -6,9 +6,12 @@ class User extends BaseController
 {
     public function index()
     {
+        $db = db_connect();
+        $sql = 'SELECT * FROM user WHERE email = ?';
+
         $data = [
-            'title' => 'Profil',
-            'user' => session()->get('name')
+            'title' => 'Profil Saya',
+            'user' => $db->query($sql, session()->get('email'))->getRowArray()
         ];
 
         return view('user/index', $data);

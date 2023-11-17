@@ -10,4 +10,5 @@ $routes->get('/auth/registration', 'Auth::registration');
 $routes->post('/auth/create', 'Auth::create');
 $routes->post('/auth/login', 'Auth::login');
 $routes->get('/auth/logout', 'Auth::logout');
-$routes->get('/', 'User::index');
+$routes->get('/user', 'User::index');
+$routes->get('/admin', 'Admin::index');

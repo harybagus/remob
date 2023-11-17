@@ -36,7 +36,7 @@ class Auth extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to(base_url('/auth'))->withInput();
+            return redirect()->to(base_url('auth'))->withInput();
         }
 
         $email = $this->request->getVar('email');
@@ -50,20 +50,27 @@ class Auth extends BaseController
         if ($user) {
             if ($user['is_active'] == 1) {
                 if (password_verify($password, $user['password'])) {
-                    $data['name'] = $user['name'];
+                    $data = [
+                        'email' => $user['email'],
+                        'role_id' => $user['role_id']
+                    ];
                     session()->set($data);
-                    return redirect()->to(base_url('/'))->withInput();
+                    if ($user['role_id'] == 1) {
+                        return redirect()->to(base_url('admin'))->withInput();
+                    } else {
+                        return redirect()->to(base_url('user'))->withInput();
+                    }
                 } else {
                     session()->setFlashdata('errorMessage', 'Password salah!');
-                    return redirect()->to(base_url('/auth'))->withInput();
+                    return redirect()->to(base_url('auth'))->withInput();
                 }
             } else {
                 session()->setFlashdata('errorMessage', 'Email belum diaktivasi!');
-                return redirect()->to(base_url('/auth'))->withInput();
+                return redirect()->to(base_url('auth'))->withInput();
             }
         } else {
             session()->setFlashdata('errorMessage', 'Email belum terdaftar!');
-            return redirect()->to(base_url('/auth'))->withInput();
+            return redirect()->to(base_url('auth'))->withInput();
         }
     }
 
@@ -105,7 +112,7 @@ class Auth extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to(base_url('/auth/registration'))->withInput();
+            return redirect()->to(base_url('auth/registration'))->withInput();
         }
 
         $this->authModel->save([
@@ -119,7 +126,7 @@ class Auth extends BaseController
         ]);
 
         session()->setFlashdata('successMessage', 'Selamat, Anda berhasil membuat akun! silakan aktivasi');
-        return redirect()->to(base_url('/auth'));
+        return redirect()->to(base_url('auth'));
     }
 
     public function logout()
@@ -128,6 +135,6 @@ class Auth extends BaseController
         session()->remove('role_id');
 
         session()->setFlashdata('successMessage', 'Anda telah logout! terimakasih sudah mengunjungi ReMob');
-        return redirect()->to(base_url('/auth'));
+        return redirect()->to(base_url('auth'));
     }
 }
