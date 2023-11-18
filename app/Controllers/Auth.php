@@ -48,24 +48,19 @@ class Auth extends BaseController
         $user = $db->query($sql, $email)->getRowArray();
 
         if ($user) {
-            if ($user['is_active'] == 1) {
-                if (password_verify($password, $user['password'])) {
-                    $data = [
-                        'email' => $user['email'],
-                        'role_id' => $user['role_id']
-                    ];
-                    session()->set($data);
-                    if ($user['role_id'] == 1) {
-                        return redirect()->to(base_url('admin'))->withInput();
-                    } else {
-                        return redirect()->to(base_url('user'))->withInput();
-                    }
+            if (password_verify($password, $user['password'])) {
+                $data = [
+                    'email' => $user['email'],
+                    'role_id' => $user['role_id']
+                ];
+                session()->set($data);
+                if ($user['role_id'] == 1) {
+                    return redirect()->to(base_url('admin'))->withInput();
                 } else {
-                    session()->setFlashdata('errorMessage', 'Password salah!');
-                    return redirect()->to(base_url('auth'))->withInput();
+                    return redirect()->to(base_url('user'))->withInput();
                 }
             } else {
-                session()->setFlashdata('errorMessage', 'Email belum diaktivasi!');
+                session()->setFlashdata('errorMessage', 'Password salah!');
                 return redirect()->to(base_url('auth'))->withInput();
             }
         } else {
@@ -121,11 +116,10 @@ class Auth extends BaseController
             'image' => 'default.jpg',
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'role_id' => 2,
-            'is_active' => 1,
             'date_created' => time()
         ]);
 
-        session()->setFlashdata('successMessage', 'Selamat, Anda berhasil membuat akun! silakan aktivasi');
+        session()->setFlashdata('successMessage', 'Selamat, Anda berhasil membuat akun! silakan login');
         return redirect()->to(base_url('auth'));
     }
 
