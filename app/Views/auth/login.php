@@ -75,10 +75,6 @@
                                 <hr>
 
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Lupa Password?</a>
-                                </div>
-
-                                <div class="text-center">
                                     <a class="small" href="/auth/registration">Belum punya akun? Buat akun!</a>
                                 </div>
                             </div>
