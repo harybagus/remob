@@ -36,9 +36,6 @@
                 <div class="sidebar-brand-text mx-3">ReMob</div>
             </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
             <!-- Query Menu -->
             <?php
             $db = db_connect();
@@ -47,20 +44,36 @@
             ?>
 
             <?php foreach ($menu as $menu) : ?>
-                <!-- Nav Item - Dashboard -->
-                <?php if ($title == $menu['title']) : ?>
-                    <li class="nav-item active">
-                    <?php else : ?>
-                    <li class="nav-item">
-                    <?php endif; ?>
-                    <a class="nav-link pb-0" href="/<?= $menu['url']; ?>">
-                        <i class="<?= $menu['icon']; ?>"></i>
-                        <span><?= $menu['title']; ?></span></a>
-                    </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider my-0 mt-3">
+                <!-- Menu -->
+                <div class="sidebar-heading">
+                    <?= $menu['menu']; ?>
+                </div>
+
+                <!-- Submenu sesuai menu -->
+                <?php
+                $querySubmenu = "SELECT * FROM `sub_menu` WHERE `menu_id` = ?";
+                $submenu = $db->query($querySubmenu, $menu['id'])->getResultArray();
+                ?>
+
+                <?php foreach ($submenu as $submenu) : ?>
+                    <!-- Nav Item - Dashboard -->
+                    <?php if ($title == $submenu['title']) : ?>
+                        <li class="nav-item active">
+                        <?php else : ?>
+                        <li class="nav-item">
+                        <?php endif; ?>
+                        <a class="nav-link pb-0 mb-3" href="/<?= $submenu['url']; ?>">
+                            <i class="<?= $submenu['icon']; ?>"></i>
+                            <span><?= $submenu['title']; ?></span></a>
+                        </li>
+                    <?php endforeach; ?>
                 <?php endforeach; ?>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Logout -->
                 <li class="nav-item">
