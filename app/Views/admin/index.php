@@ -26,7 +26,7 @@
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="/admin/account">
-                        <i class="fas fa-cog fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <i class="fas fa-users-cog fa-sm fa-fw mr-2 text-gray-400"></i>
                         Kelola Akun
                     </a>
                     <div class="dropdown-divider"></div>

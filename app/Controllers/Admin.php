@@ -22,4 +22,15 @@ class Admin extends BaseController
 
         return view('admin/index', $data);
     }
+
+    public function account()
+    {
+        $data = [
+            'title' => 'Kelola Akun',
+            'account' => $this->authModel->getAccount(session()->get('email')),
+            'adminAccount' => $this->authModel->getAdminAccount(session()->get('email'))
+        ];
+
+        return view('admin/account', $data);
+    }
 }
