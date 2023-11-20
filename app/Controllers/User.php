@@ -2,16 +2,22 @@
 
 namespace App\Controllers;
 
+use App\Models\AuthModel;
+
 class User extends BaseController
 {
+    protected $authModel;
+
+    public function __construct()
+    {
+        $this->authModel = new AuthModel();
+    }
+
     public function index()
     {
-        $db = db_connect();
-        $sql = 'SELECT * FROM user WHERE email = ?';
-
         $data = [
             'title' => 'Profil Saya',
-            'user' => $db->query($sql, session()->get('email'))->getRowArray()
+            'account' => $this->authModel->getAccount(session()->get('email'))
         ];
 
         return view('user/index', $data);

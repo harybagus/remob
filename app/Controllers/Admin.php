@@ -2,16 +2,22 @@
 
 namespace App\Controllers;
 
+use App\Models\AuthModel;
+
 class Admin extends BaseController
 {
+    protected $authModel;
+
+    public function __construct()
+    {
+        $this->authModel = new AuthModel();
+    }
+
     public function index()
     {
-        $db = db_connect();
-        $sql = 'SELECT * FROM user WHERE email = ?';
-
         $data = [
             'title' => 'Dashboard',
-            'admin' => $db->query($sql, session()->get('email'))->getRowArray()
+            'account' => $this->authModel->getAccount(session()->get('email'))
         ];
 
         return view('admin/index', $data);

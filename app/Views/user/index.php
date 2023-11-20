@@ -20,8 +20,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['name']; ?></span>
-                    <img class="img-profile rounded-circle" src="/assets/img/profile/<?= $user['image']; ?>">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $account['name']; ?></span>
+                    <img class="img-profile rounded-circle" src="/assets/img/profile/<?= $account['image']; ?>">
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -52,13 +52,13 @@
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="/assets/img/profile/<?= $user['image']; ?>" class="img-fluid rounded-start" alt="<?= $user['name']; ?>">
+                    <img src="/assets/img/profile/<?= $account['image']; ?>" class="img-fluid rounded-start" alt="<?= $account['name']; ?>">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $user['name']; ?></h5>
-                        <p class="card-text"><?= $user['email']; ?></p>
-                        <p class="card-text"><small class="text-body-secondary">Bergabung sejak <?= date('d F Y', $user['date_created']); ?></small></p>
+                        <h5 class="card-title"><?= $account['name']; ?></h5>
+                        <p class="card-text"><?= $account['email']; ?></p>
+                        <p class="card-text"><small class="text-body-secondary">Bergabung sejak <?= date('d F Y', $account['date_created']); ?></small></p>
                     </div>
                 </div>
             </div>
