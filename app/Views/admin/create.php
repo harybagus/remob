@@ -12,18 +12,6 @@
             <i class="fa fa-bars text-info"></i>
         </button>
 
-        <!-- Topbar Search -->
-        <form action="" method="post" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" autocomplete="off">
-            <div class="input-group">
-                <input type="text" name="keyword" class="form-control bg-light border-0 small" placeholder="Masukkan kata kunci pencarian.." aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-info" type="submit" name="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
 
@@ -62,51 +50,60 @@
 
         <div class="dropdown-divider mb-3"></div>
 
-        <?php if (session()->getFlashdata('successMessage')) : ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('successMessage'); ?>
+        <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
+            <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
+                <h4>Kesalahan</h4>
+                <ul>
+                    <?php foreach (session()->getFlashdata('_ci_validation_errors') as $error) : ?>
+                        <li>
+                            <?= $error; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         <?php endif; ?>
 
-        <!-- Button trigger modal -->
-        <a href="/admin/create" class="btn btn-info mb-3">
-            <i class="fas fa-user-plus"></i>
-            Tambah data admin
-        </a>
+        <?php if (session()->getFlashdata('successMessage')) : ?>
+            <div class="col-sm-7 alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('successMessage'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php elseif (session()->getFlashdata('errorMessage')) : ?>
+            <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
+                <h4>Kesalahan</h4>
+                <ul>
+                    <li>
+                        <?= session()->getFlashdata('errorMessage'); ?>
+                    </li>
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
 
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $i = 1; ?>
-                <?php foreach ($adminAccount as $adminAccount) : ?>
-                    <tr>
-                        <th scope="row"><?= $i++; ?></th>
-                        <td><?= $adminAccount['name']; ?></td>
-                        <td><?= $adminAccount['email']; ?></td>
-                        <td>
-                            <a href="/admin/update/<?= $adminAccount['id']; ?>" class="btn btn-warning">
-                                <i class="fas fa-user-edit"></i>
-                            </a>
-                            <?php if ($adminAccount['email'] != session()->get('email')) : ?>
-                                <a href="/admin/delete/<?= $adminAccount['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data admin?')">
-                                    <i class="fas fa-user-minus"></i>
-                                </a>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <form action="/admin/add" method="post" autocomplete="off">
+            <?= csrf_field(); ?>
+            <div class="row mb-3">
+                <label for="name" class="col-sm-2 col-form-label">Nama lengkap</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="name" name="name" value="<?= old('name'); ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="email" name="email" value="<?= old('email'); ?>">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info">Tambah data</button>
+            <a href="/admin/account" class="btn btn-secondary">Batal</a>
+        </form>
 
     </div>
     <!-- /.container-fluid -->

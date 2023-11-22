@@ -13,3 +13,5 @@ $routes->get('/auth/logout', 'Auth::logout');
 $routes->get('/user', 'User::index');
 $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/account', 'Admin::account');
+$routes->get('/admin/create', 'Admin::create');
+$routes->post('/admin/add', 'Admin::add');
