@@ -14,6 +14,11 @@ class AuthModel extends Model
         return $this->where(['email' => $email])->first();
     }
 
+    public function getAccountById($id)
+    {
+        return $this->where(['id' => $id])->first();
+    }
+
     public function getAdminAccount()
     {
         return $this->where(['role_id' => 1])->doFindAll();
