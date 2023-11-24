@@ -9,7 +9,7 @@
 
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
+            <i class="fa fa-bars text-info"></i>
         </button>
 
         <!-- Topbar Navbar -->
@@ -28,6 +28,10 @@
                     <a class="dropdown-item" href="/admin/account">
                         <i class="fas fa-users-cog fa-sm fa-fw mr-2 text-gray-400"></i>
                         Kelola Akun
+                    </a>
+                    <a class="dropdown-item" href="/admin/change-password">
+                        <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Ubah Password
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/auth/logout" data-toggle="modal" data-target="#logoutModal">

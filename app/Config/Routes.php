@@ -18,3 +18,5 @@ $routes->post('/admin/account/add', 'Admin::addAccount');
 $routes->get('/admin/account/update/(:num)', 'Admin::updateAccountAdmin/$1');
 $routes->post('/admin/account/edit/(:num)', 'Admin::editAccount/$1');
 $routes->get('/admin/account/delete/(:num)', 'Admin::deleteAccount/$1');
+$routes->get('/admin/change-password', 'Admin::changePassword');
+$routes->post('/admin/change', 'Admin::change');

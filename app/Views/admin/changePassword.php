@@ -70,36 +70,48 @@
             </div>
         <?php endif; ?>
 
-        <form action="/admin/account/edit/<?= $updatedAccount['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+        <?php if (session()->getFlashdata('successMessage')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('successMessage'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php elseif (session()->getFlashdata('errorMessage')) : ?>
+            <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
+                <h4>Kesalahan</h4>
+                <ul>
+                    <li>
+                        <?= session()->getFlashdata('errorMessage'); ?>
+                    </li>
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
+        <form action="/admin/change" method="post" autocomplete="off">
             <?= csrf_field(); ?>
-            <input type="hidden" name="old-image" value="<?= old('id', $updatedAccount['image']); ?>">
             <div class="row mb-3">
-                <label for="name" class="col-sm-2 col-form-label">Nama lengkap</label>
+                <label for="current-password" class="col-sm-2 col-form-label">Password saat ini</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="name" name="name" value="<?= old('name', $updatedAccount['name']); ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="email" name="email" value="<?= old('email', $updatedAccount['email']); ?>" readonly>
+                    <input type="password" class="form-control" id="current-password" name="current-password">
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-sm-2">
-                    <img src="/assets/img/profile/<?= $updatedAccount['image']; ?>" alt="<?= $updatedAccount['name']; ?>" class="img-thumbnail img-preview">
-                </div>
+                <label for="new-password" class="col-sm-2 col-form-label">Password baru</label>
                 <div class="col-sm-5">
-                    <div class="custom-file">
-                        <input type="file" accept="image/*" class="custom-file-input" id="image" name="image" aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="image">Choose file</label>
-                    </div>
+                    <input type="password" class="form-control" id="new-password" name="new-password">
                 </div>
             </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-info">Ubah data</button>
-                <a href="/admin/account" class="btn btn-secondary">Batal</a>
+            <div class="row mb-3">
+                <label for="confirm-password" class="col-sm-2 col-form-label">Confirm password</label>
+                <div class="col-sm-5">
+                    <input type="password" class="form-control" id="confirm-password" name="confirm-password">
+                </div>
             </div>
+            <button type="submit" class="btn btn-info">Ubah password</button>
         </form>
 
     </div>
