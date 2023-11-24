@@ -66,27 +66,6 @@
             </div>
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('successMessage')) : ?>
-            <div class="col-sm-7 alert alert-success alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('successMessage'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif (session()->getFlashdata('errorMessage')) : ?>
-            <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
-                <h4>Kesalahan</h4>
-                <ul>
-                    <li>
-                        <?= session()->getFlashdata('errorMessage'); ?>
-                    </li>
-                </ul>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
-
         <form action="/admin/add" method="post" enctype="multipart/form-data" autocomplete="off">
             <?= csrf_field(); ?>
             <div class="row mb-3">
