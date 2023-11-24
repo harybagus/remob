@@ -87,7 +87,7 @@
             </div>
         <?php endif; ?>
 
-        <form action="/admin/add" method="post" autocomplete="off">
+        <form action="/admin/add" method="post" enctype="multipart/form-data" autocomplete="off">
             <?= csrf_field(); ?>
             <div class="row mb-3">
                 <label for="name" class="col-sm-2 col-form-label">Nama lengkap</label>
@@ -99,6 +99,17 @@
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="email" name="email" value="<?= old('email'); ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-2">
+                    <img src="/assets/img/profile/default.jpg" alt="Default image" class="img-thumbnail img-preview">
+                </div>
+                <div class="col-sm-5">
+                    <div class="custom-file">
+                        <input type="file" accept="image/*" class="custom-file-input" id="image" name="image" value="<?= old('image'); ?> aria-describedby=" inputGroupFileAddon01">
+                        <label class="custom-file-label" for="image">Choose file</label>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-info">Tambah data</button>

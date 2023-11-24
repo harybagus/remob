@@ -60,21 +60,37 @@ class Admin extends BaseController
                     'valid_email' => 'Alamat email tidak valid.',
                     'is_unique' => 'Alamat email sudah terdaftar.'
                 ]
+            ],
+            'image' => [
+                'rules' => 'max_size[image,1024]|is_image[image]|mime_in[image,image/jpg,image,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar',
+                    'is_image' => 'Yang Anda pilih bukan gambar',
+                    'mime_in' => 'Ekstensi file tidak diizinkan'
+                ]
             ]
         ])) {
             return redirect()->to(base_url('admin/create'))->withInput();
         }
 
+        $image = $this->request->getFile('image');
+        if ($image->getError() == 4) {
+            $imageName = 'default.jpg';
+        } else {
+            $imageName = $image->getRandomName();
+            $image->move('assets/img/profile', $imageName);
+        }
+
         $this->authModel->save([
             'name' => $this->request->getVar('name'),
             'email' => $this->request->getVar('email'),
-            'image' => 'default.jpg',
+            'image' => $imageName,
             'password' => password_hash(123123123, PASSWORD_DEFAULT),
             'role_id' => 1,
             'date_created' => time()
         ]);
 
-        session()->setFlashdata('successMessage', 'Selamat, Anda berhasil membuat akun admin!');
+        session()->setFlashdata('successMessage', 'Data berhasil ditambahkan');
         return redirect()->to(base_url('admin/account'));
     }
 
