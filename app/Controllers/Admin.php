@@ -34,17 +34,17 @@ class Admin extends BaseController
         return view('admin/account', $data);
     }
 
-    public function create()
+    public function createAccountAdmin()
     {
         $data = [
             'title' => 'Tambah Data Admin',
             'account' => $this->authModel->getAccount(session()->get('email'))
         ];
 
-        return view('admin/create', $data);
+        return view('admin/createAccountAdmin', $data);
     }
 
-    public function add()
+    public function addAccount()
     {
         if (!$this->validate([
             'name' => [
@@ -70,7 +70,7 @@ class Admin extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to(base_url('admin/create'))->withInput();
+            return redirect()->to(base_url('admin/createAccount'))->withInput();
         }
 
         $image = $this->request->getFile('image');
@@ -86,7 +86,7 @@ class Admin extends BaseController
             'email' => $this->request->getVar('email'),
             'image' => $imageName,
             'password' => password_hash(123123123, PASSWORD_DEFAULT),
-            'role_id' => 1,
+            'role_id' => $this->request->getVar('role-id'),
             'date_created' => time()
         ]);
 
@@ -94,7 +94,7 @@ class Admin extends BaseController
         return redirect()->to(base_url('admin/account'));
     }
 
-    public function update($id)
+    public function updateAccountAdmin($id)
     {
         $data = [
             'title' => 'Ubah Data Admin',
@@ -102,10 +102,10 @@ class Admin extends BaseController
             'updatedAccount' => $this->authModel->getAccountById($id)
         ];
 
-        return view('admin/update', $data);
+        return view('admin/updateAccountAdmin', $data);
     }
 
-    public function edit($id)
+    public function editAccount($id)
     {
         if (!$this->validate([
             'name' => [
@@ -123,7 +123,7 @@ class Admin extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to(base_url('admin/update/' . $id))->withInput();
+            return redirect()->to(base_url('admin/updateAccount/' . $id))->withInput();
         }
 
         $image = $this->request->getFile('image');
@@ -147,7 +147,7 @@ class Admin extends BaseController
         return redirect()->to(base_url('admin/account'));
     }
 
-    public function delete($id)
+    public function deleteAccount($id)
     {
         $account = $this->authModel->getAccountById($id);
 

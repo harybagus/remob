@@ -72,7 +72,7 @@
         <?php endif; ?>
 
         <!-- Button trigger modal -->
-        <a href="/admin/create" class="btn btn-info mb-3">
+        <a href="/admin/account/create" class="btn btn-info mb-3">
             <i class="fas fa-user-plus"></i>
             Tambah data admin
         </a>
@@ -94,11 +94,11 @@
                         <td><?= $adminAccount['name']; ?></td>
                         <td><?= $adminAccount['email']; ?></td>
                         <td>
-                            <a href="/admin/update/<?= $adminAccount['id']; ?>" class="btn btn-warning">
+                            <a href="/admin/account/update/<?= $adminAccount['id']; ?>" class="btn btn-warning">
                                 <i class="fas fa-user-edit"></i>
                             </a>
                             <?php if ($adminAccount['email'] != session()->get('email')) : ?>
-                                <a href="/admin/delete/<?= $adminAccount['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data admin?')">
+                                <a href="/admin/account/delete/<?= $adminAccount['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data admin?')">
                                     <i class="fas fa-user-minus"></i>
                                 </a>
                             <?php endif; ?>

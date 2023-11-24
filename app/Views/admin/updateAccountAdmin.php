@@ -66,33 +66,36 @@
             </div>
         <?php endif; ?>
 
-        <form action="/admin/add" method="post" enctype="multipart/form-data" autocomplete="off">
+        <form action="/admin/account/edit/<?= $updatedAccount['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
             <?= csrf_field(); ?>
+            <input type="hidden" name="old-image" value="<?= old('id', $updatedAccount['image']); ?>">
             <div class="row mb-3">
                 <label for="name" class="col-sm-2 col-form-label">Nama lengkap</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="name" name="name" value="<?= old('name'); ?>">
+                    <input type="text" class="form-control" id="name" name="name" value="<?= old('name', $updatedAccount['name']); ?>">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="email" name="email" value="<?= old('email'); ?>">
+                    <input type="text" class="form-control" id="email" name="email" value="<?= old('email', $updatedAccount['email']); ?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-sm-2">
-                    <img src="/assets/img/profile/default.jpg" alt="Default image" class="img-thumbnail img-preview">
+                    <img src="/assets/img/profile/<?= $updatedAccount['image']; ?>" alt="<?= $updatedAccount['name']; ?>" class="img-thumbnail img-preview">
                 </div>
                 <div class="col-sm-5">
                     <div class="custom-file">
-                        <input type="file" accept="image/*" class="custom-file-input" id="image" name="image" value="<?= old('image'); ?> aria-describedby=" inputGroupFileAddon01">
+                        <input type="file" accept="image/*" class="custom-file-input" id="image" name="image" aria-describedby="inputGroupFileAddon01">
                         <label class="custom-file-label" for="image">Choose file</label>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-info">Tambah data</button>
-            <a href="/admin/account" class="btn btn-secondary">Batal</a>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-info">Ubah data</button>
+                <a href="/admin/account" class="btn btn-secondary">Batal</a>
+            </div>
         </form>
 
     </div>
