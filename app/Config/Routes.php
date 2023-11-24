@@ -17,3 +17,4 @@ $routes->get('/admin/create', 'Admin::create');
 $routes->post('/admin/add', 'Admin::add');
 $routes->get('/admin/update/(:num)', 'Admin::update/$1');
 $routes->post('/admin/edit/(:num)', 'Admin::edit/$1');
+$routes->get('/admin/delete/(:num)', 'Admin::delete/$1');
