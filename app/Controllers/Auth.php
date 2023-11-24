@@ -23,14 +23,14 @@ class Auth extends BaseController
     {
         if (!$this->validate([
             'email' => [
-                'rules' => 'required|trim|valid_email',
+                'rules' => 'required|valid_email',
                 'errors' => [
                     'required' => 'Alamat email harus diisi.',
                     'valid_email' => 'Alamat email tidak valid.'
                 ]
             ],
             'password' => [
-                'rules' => 'required|trim',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Password harus diisi.'
                 ]
