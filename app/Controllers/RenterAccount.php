@@ -72,4 +72,57 @@ class RenterAccount extends BaseController
         session()->setFlashdata('successMessage', 'Data berhasil ditambahkan');
         return redirect()->to(base_url('admin/renter'));
     }
+
+    public function update($id)
+    {
+        $data = [
+            'title' => 'Ubah Data Penyewa',
+            'account' => $this->authModel->getAccount(session()->get('email')),
+            'updatedAccount' => $this->authModel->getAccountById($id)
+        ];
+
+        return view('admin/renterAccount/update', $data);
+    }
+
+    public function edit($id)
+    {
+        if (!$this->validate([
+            'name' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama lengkap harus diisi.'
+                ]
+            ],
+            'image' => [
+                'rules' => 'max_size[image,1024]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'Yang Anda pilih bukan gambar.',
+                    'mime_in' => 'Yang Anda pilih bukan gambar.'
+                ]
+            ]
+        ])) {
+            return redirect()->to(base_url('admin/renter/update/' . $id))->withInput();
+        }
+
+        $image = $this->request->getFile('image');
+        if ($image->getError() == 4) {
+            $imageName = $this->request->getVar('old-image');
+        } else {
+            $imageName = $image->getRandomName();
+            $image->move('assets/img/profile', $imageName);
+            if ($this->request->getVar('old-image') != 'default.jpg') {
+                unlink('assets/img/profile/' . $this->request->getVar('old-image'));
+            }
+        }
+
+        $this->authModel->save([
+            'id' => $id,
+            'name' => $this->request->getVar('name'),
+            'image' => $imageName
+        ]);
+
+        session()->setFlashdata('successMessage', 'Data berhasil diubah');
+        return redirect()->to(base_url('admin/renter'));
+    }
 }
