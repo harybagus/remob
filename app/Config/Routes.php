@@ -23,4 +23,7 @@ $routes->get('/admin/account/update/(:num)', 'AdminAccount::update/$1');
 $routes->post('/admin/account/edit/(:num)', 'AdminAccount::edit/$1');
 $routes->get('/admin/account/delete/(:num)', 'AdminAccount::delete/$1');
 
+$routes->get('/admin/renter/create', 'RenterAccount::index');
+$routes->post('/admin/renter/add', 'RenterAccount::add');
+
 $routes->get('/user', 'User::index');
