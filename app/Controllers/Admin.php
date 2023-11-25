@@ -34,6 +34,17 @@ class Admin extends BaseController
         return view('admin/account', $data);
     }
 
+    public function renterData()
+    {
+        $data = [
+            'title' => 'Data Penyewa',
+            'account' => $this->authModel->getAccount(session()->get('email')),
+            'renterAccount' => $this->authModel->getRenterAccount(session()->get('email'))
+        ];
+
+        return view('admin/renterData', $data);
+    }
+
     public function createAccountAdmin()
     {
         $data = [

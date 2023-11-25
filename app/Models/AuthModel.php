@@ -23,4 +23,9 @@ class AuthModel extends Model
     {
         return $this->where(['role_id' => 1])->doFindAll();
     }
+
+    public function getRenterAccount()
+    {
+        return $this->where(['role_id' => 2])->doFindAll();
+    }
 }

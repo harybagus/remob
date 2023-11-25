@@ -13,6 +13,7 @@ $routes->get('/auth/logout', 'Auth::logout');
 $routes->get('/user', 'User::index');
 $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/account', 'Admin::account');
+$routes->get('/admin/renter', 'Admin::renterData');
 $routes->get('/admin/account/create', 'Admin::createAccountAdmin');
 $routes->post('/admin/account/add', 'Admin::addAccount');
 $routes->get('/admin/account/update/(:num)', 'Admin::updateAccountAdmin/$1');
