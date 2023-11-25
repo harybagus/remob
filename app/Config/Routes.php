@@ -27,5 +27,6 @@ $routes->get('/admin/renter/create', 'RenterAccount::index');
 $routes->post('/admin/renter/add', 'RenterAccount::add');
 $routes->get('/admin/renter/update/(:num)', 'RenterAccount::update/$1');
 $routes->post('/admin/renter/edit/(:num)', 'RenterAccount::edit/$1');
+$routes->get('/admin/renter/delete/(:num)', 'RenterAccount::delete/$1');
 
 $routes->get('/user', 'User::index');

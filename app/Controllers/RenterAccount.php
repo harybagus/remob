@@ -125,4 +125,18 @@ class RenterAccount extends BaseController
         session()->setFlashdata('successMessage', 'Data berhasil diubah');
         return redirect()->to(base_url('admin/renter'));
     }
+
+    public function delete($id)
+    {
+        $account = $this->authModel->getAccountById($id);
+
+        if ($account['image'] != 'default.jpg') {
+            unlink('assets/img/profile/' . $account['image']);
+        }
+
+        $this->authModel->delete($id);
+
+        session()->setFlashdata('successMessage', 'Data berhasil dihapus');
+        return redirect()->to(base_url('admin/renter'));
+    }
 }

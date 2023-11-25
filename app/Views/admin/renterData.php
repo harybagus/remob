@@ -92,7 +92,7 @@
                             <a href="/admin/renter/update/<?= $renterAccount['id']; ?>" class="btn btn-warning">
                                 <i class="fas fa-user-edit"></i>
                             </a>
-                            <a href="/admin/renter/delete/<?= $renterAccount['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data admin?')">
+                            <a href="/admin/renter/delete/<?= $renterAccount['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data penyewa?')">
                                 <i class="fas fa-user-minus"></i>
                             </a>
                         </td>
