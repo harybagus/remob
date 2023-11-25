@@ -65,7 +65,7 @@ class AdminAccount extends BaseController
             'email' => $this->request->getVar('email'),
             'image' => $imageName,
             'password' => password_hash(123123123, PASSWORD_DEFAULT),
-            'role_id' => $this->request->getVar('role-id'),
+            'role_id' => 1,
             'date_created' => time()
         ]);
 

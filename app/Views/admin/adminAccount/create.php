@@ -72,7 +72,6 @@
 
         <form action="/admin/account/add" method="post" enctype="multipart/form-data" autocomplete="off">
             <?= csrf_field(); ?>
-            <input type="hidden" id="role-id" name="role-id" value="1">
             <div class="row mb-3">
                 <label for="name" class="col-sm-2 col-form-label">Nama lengkap</label>
                 <div class="col-sm-5">
