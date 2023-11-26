@@ -3,14 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\AuthModel;
+use App\Models\CarModel;
 
 class Admin extends BaseController
 {
     protected $authModel;
+    protected $carModel;
 
     public function __construct()
     {
         $this->authModel = new AuthModel();
+        $this->carModel = new CarModel();
     }
 
     public function index()
@@ -43,6 +46,17 @@ class Admin extends BaseController
         ];
 
         return view('admin/renterData', $data);
+    }
+
+    public function carData()
+    {
+        $data = [
+            'title' => 'Data Mobil',
+            'account' => $this->authModel->getAccount(session()->get('email')),
+            'car' => $this->carModel->getCar()
+        ];
+
+        return view('admin/carData', $data);
     }
 
     public function changePassword()

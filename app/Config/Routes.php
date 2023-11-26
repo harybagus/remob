@@ -14,6 +14,7 @@ $routes->get('/auth/logout', 'Auth::logout');
 $routes->get('/admin', 'Admin::index');
 $routes->get('/admin/account', 'Admin::account');
 $routes->get('/admin/renter', 'Admin::renterData');
+$routes->get('/admin/car', 'Admin::carData');
 $routes->get('/admin/change-password', 'Admin::changePassword');
 $routes->post('/admin/change', 'Admin::change');
 
