@@ -75,7 +75,7 @@
                     <div class="card-header">
                         <h6 class="float-left pt-2"><?= $car['name']; ?></h6>
                         <div class="float-right">
-                            <a href="" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="/admin/car/update/<?= $car['id']; ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                             <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </div>

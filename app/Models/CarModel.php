@@ -13,4 +13,9 @@ class CarModel extends Model
     {
         return $this->doFindAll();
     }
+
+    public function getCarById($id)
+    {
+        return $this->where(['id' => $id])->first();
+    }
 }

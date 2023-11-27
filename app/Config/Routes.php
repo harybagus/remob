@@ -32,5 +32,7 @@ $routes->get('/admin/renter/delete/(:num)', 'RenterAccount::delete/$1');
 
 $routes->get('/admin/car/create', 'Car::index');
 $routes->post('/admin/car/add', 'Car::add');
+$routes->get('/admin/car/update/(:num)', 'Car::update/$1');
+$routes->post('/admin/car/edit/(:num)', 'Car::edit/$1');
 
 $routes->get('/user', 'User::index');

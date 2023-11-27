@@ -8,8 +8,10 @@ if (image != null) {
         const [file] = image.files;
         imagePreview.src = URL.createObjectURL(file);
 
-        colImagePreview.classList.remove('d-none');
-        imageLabel.classList.add('d-none')
+        if (colImagePreview && imageLabel) {
+            colImagePreview.classList.remove('d-none');
+            imageLabel.classList.add('d-none')
+        }
 
         var fileName = $(this).val().replace('C:\\fakepath\\', " ");
         $(this).next('.custom-file-label').html(fileName);
