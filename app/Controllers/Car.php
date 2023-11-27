@@ -110,7 +110,7 @@ class Car extends BaseController
     public function update($id)
     {
         $data = [
-            'title' => 'Ubah Data Admin',
+            'title' => 'Ubah Data Mobil',
             'account' => $this->authModel->getAccount(session()->get('email')),
             'car' => $this->carModel->getCarById($id)
         ];

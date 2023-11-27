@@ -72,7 +72,7 @@
 
         <form action="/admin/car/edit/<?= $car['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
             <?= csrf_field(); ?>
-            <input type="hidden" name="old-image" value="<?= old('id', $car['image']); ?>">
+            <input type="hidden" name="old-image" value="<?= $car['image']; ?>">
             <div class="row mb-3">
                 <label for="name" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-5">
