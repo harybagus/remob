@@ -202,4 +202,16 @@ class Car extends BaseController
         session()->setFlashdata('successMessage', 'Data berhasil diubah');
         return redirect()->to(base_url('admin/car'));
     }
+
+    public function delete($id)
+    {
+        $car = $this->carModel->getCarById($id);
+
+        unlink('assets/img/car/' . $car['image']);
+
+        $this->carModel->delete($id);
+
+        session()->setFlashdata('successMessage', 'Data berhasil dihapus');
+        return redirect()->to(base_url('admin/car'));
+    }
 }
