@@ -9,7 +9,7 @@
 
         <!-- Sidebar Toggle (Topbar) -->
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
+            <i class="fa fa-bars text-info"></i>
         </button>
 
         <!-- Topbar Navbar -->
@@ -27,7 +27,7 @@
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="/renter">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profil
+                        Profil Saya
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/auth/logout" data-toggle="modal" data-target="#logoutModal">
@@ -48,17 +48,79 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
+        <div class="dropdown-divider mb-3"></div>
+
         <!-- Card Profile -->
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="/assets/img/profile/<?= $account['image']; ?>" class="img-fluid rounded-start" alt="<?= $account['name']; ?>">
+        <div class="d-flex mb-3">
+            <div class="float-left w-100">
+                <div class="card mb-3 mr-3 border-info">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="/assets/img/profile/<?= $account['image']; ?>" class="img-thumbnail m-2" alt="<?= $account['name']; ?>">
+                        </div>
+                        <div class="col-md-8 d-flex">
+                            <div class="card-body m-auto">
+                                <h5 class="card-title"><?= $account['name']; ?></h5>
+                                <p class="card-text"><?= $account['email']; ?></p>
+                                <p class="card-text"><small class="text-body-secondary">Bergabung sejak <?= date('d F Y', $account['date_created']); ?></small></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8">
+
+                <div class="card mr-3 border-info">
+                    <h5 class="card-header">Ubah Password</h5>
                     <div class="card-body">
-                        <h5 class="card-title"><?= $account['name']; ?></h5>
-                        <p class="card-text"><?= $account['email']; ?></p>
-                        <p class="card-text"><small class="text-body-secondary">Bergabung sejak <?= date('d F Y', $account['date_created']); ?></small></p>
+                        <form action="/renter/change-password" method="post" autocomplete="off">
+                            <?= csrf_field(); ?>
+                            <div class="form-group">
+                                <label for="current-password">Password saat ini</label>
+                                <input type="password" class="form-control" id="current-password" name="current-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Password baru</label>
+                                <input type="password" class="form-control" id="new-password" name="new-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm password</label>
+                                <input type="password" class="form-control" id="confirm-password" name="confirm-password">
+                            </div>
+                            <button type="submit" class="btn btn-info">Ubah password</button>
+                            <button type="reset" class="btn btn-secondary">Batal</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="float-right w-100">
+                <div class="card mr-3 border-info">
+                    <h5 class="card-header">Ubah Profil</h5>
+                    <div class="card-body">
+                        <form action="/renter/account/update/<?= $account['id']; ?>" method="post" autocomplete="off">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="old-image" value="<?= $account['image']; ?>">
+                            <div class="form-group">
+                                <label for="name">Nama lengkap</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<?= old('name', $account['name']); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" value="<?= old('email', $account['email']); ?>" readonly>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-4">
+                                    <img src="/assets/img/profile/<?= $account['image']; ?>" alt="<?= $account['name']; ?>" class="img-thumbnail img-preview">
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="custom-file">
+                                        <input type="file" accept="image/*" class="custom-file-input" id="image" name="image" aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="image">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-info">Ubah profil</button>
+                            <button type="reset" class="btn btn-secondary">Batal</button>
+                        </form>
                     </div>
                 </div>
             </div>

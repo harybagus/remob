@@ -130,7 +130,7 @@
                 </div>
                 <div class="modal-body">Klik "Logout" untuk keluar dari website ini.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                     <a class="btn btn-info" href="/auth/logout">Logout</a>
                 </div>
             </div>

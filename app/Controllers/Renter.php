@@ -6,18 +6,18 @@ use App\Models\RenterAccountModel;
 
 class Renter extends BaseController
 {
-    protected $renterAccountModelModel;
+    protected $renterAccountModel;
 
     public function __construct()
     {
-        $this->renterAccountModelModel = new RenterAccountModel();
+        $this->renterAccountModel = new RenterAccountModel();
     }
 
     public function index()
     {
         $data = [
             'title' => 'Profil Saya',
-            'account' => $this->renterAccountModelModel->getAccount(session()->get('email'))
+            'account' => $this->renterAccountModel->getAccount(session()->get('email'))
         ];
 
         return view('renter/myProfile', $data);
