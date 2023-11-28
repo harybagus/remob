@@ -50,6 +50,31 @@
 
         <div class="dropdown-divider mb-3"></div>
 
+        <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
+            <div class="col-sm alert alert-danger alert-dismissible fade show" role="alert">
+                <h4>Kesalahan</h4>
+                <ul>
+                    <?php foreach (session()->getFlashdata('_ci_validation_errors') as $error) : ?>
+                        <li>
+                            <?= $error; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('successMessage')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('successMessage'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <!-- Card Profile -->
         <div class="d-flex mb-3">
             <div class="float-left w-100">
@@ -60,8 +85,8 @@
                         </div>
                         <div class="col-md-8 d-flex">
                             <div class="card-body m-auto">
-                                <h5 class="card-title"><?= $account['name']; ?></h5>
-                                <p class="card-text"><?= $account['email']; ?></p>
+                                <h5 class="card-title mb-0 text-dark"><?= $account['name']; ?></h5>
+                                <p class="card-text mb-2"><?= $account['email']; ?></p>
                                 <p class="card-text"><small class="text-body-secondary">Bergabung sejak <?= date('d F Y', $account['date_created']); ?></small></p>
                             </div>
                         </div>
@@ -93,10 +118,10 @@
             </div>
 
             <div class="float-right w-100">
-                <div class="card mr-3 border-info">
+                <div class="card border-info">
                     <h5 class="card-header">Ubah Profil</h5>
                     <div class="card-body">
-                        <form action="/renter/account/update/<?= $account['id']; ?>" method="post" autocomplete="off">
+                        <form action="/renter/account/update/<?= $account['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
                             <?= csrf_field(); ?>
                             <input type="hidden" name="old-image" value="<?= $account['image']; ?>">
                             <div class="form-group">
