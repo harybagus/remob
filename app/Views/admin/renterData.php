@@ -75,6 +75,7 @@
                     <th scope="col">No.</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Bergabung</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -85,6 +86,7 @@
                         <th scope="row"><?= $i++; ?></th>
                         <td><?= $renterAccount['name']; ?></td>
                         <td><?= $renterAccount['email']; ?></td>
+                        <td><?= date('d F Y', $renterAccount['date_created']); ?></td>
                         <td>
                             <a href="/admin/renter/read/<?= $renterAccount['id']; ?>" class="btn btn-success">
                                 <i class="fas fa-user-check"></i>

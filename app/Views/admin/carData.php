@@ -69,61 +69,63 @@
             Tambah data mobil
         </a>
 
-        <div class="row no-gutters">
+        <div class="row row-cols-1 row-cols-md-3">
             <?php foreach ($car as $car) : ?>
-                <div class="card mr-3 mb-3" style="max-width: 310px;">
-                    <div class="card-header">
-                        <h6 class="float-left pt-2"><?= $car['name']; ?></h6>
-                        <div class="float-right">
-                            <a href="/admin/car/update/<?= $car['id']; ?>" class="btn btn-warning">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="/admin/car/delete/<?= $car['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data admin?')">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="float-left pt-2"><?= $car['name']; ?></h6>
+                            <div class="float-right">
+                                <a href="/admin/car/update/<?= $car['id']; ?>" class="btn btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/admin/car/delete/<?= $car['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data admin?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md">
-                        <img src="/assets/img/car/<?= $car['image']; ?>" alt="<?= $car['name']; ?>" class="img-thumbnail mt-3 mb-2">
-                    </div>
-                    <div class="col-md">
-                        <table class="table table-sm table-borderless">
-                            <tbody>
-                                <tr>
-                                    <td>Merk</td>
-                                    <td>:</td>
-                                    <th><?= $car['merk']; ?></th>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td>Nomor polisi</td>
-                                    <td>:</td>
-                                    <th><?= $car['license_plate']; ?></th>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td>Jumlah kursi</td>
-                                    <td>:</td>
-                                    <th><?= $car['seat']; ?></th>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td>Tahun produksi</td>
-                                    <td>:</td>
-                                    <th><?= $car['production_year']; ?></th>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <td>Harga sewa / hari</td>
-                                    <td>:</td>
-                                    <th><?= formatRupiah($car['rental_price_per_day']); ?></th>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="col-md">
+                            <img src="/assets/img/car/<?= $car['image']; ?>" alt="<?= $car['name']; ?>" class="img-thumbnail mt-3 mb-2">
+                        </div>
+                        <div class="col-md">
+                            <table class="table table-sm table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>Merk</td>
+                                        <td>:</td>
+                                        <th><?= $car['merk']; ?></th>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>Nomor polisi</td>
+                                        <td>:</td>
+                                        <th><?= $car['license_plate']; ?></th>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>Jumlah kursi</td>
+                                        <td>:</td>
+                                        <th><?= $car['seat']; ?></th>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>Tahun produksi</td>
+                                        <td>:</td>
+                                        <th><?= $car['production_year']; ?></th>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>Harga sewa / hari</td>
+                                        <td>:</td>
+                                        <th><?= formatRupiah($car['rental_price_per_day']); ?></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
