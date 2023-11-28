@@ -55,9 +55,9 @@ class Auth extends BaseController
                 ];
                 session()->set($data);
                 if ($user['role_id'] == 1) {
-                    return redirect()->to(base_url('admin'))->withInput();
+                    return redirect()->to(base_url('admin'));
                 } else {
-                    return redirect()->to(base_url('user'))->withInput();
+                    return redirect()->to(base_url('renter'));
                 }
             } else {
                 session()->setFlashdata('errorMessage', 'Password salah!');

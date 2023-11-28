@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\AuthModel;
 
-class User extends BaseController
+class Renter extends BaseController
 {
     protected $authModel;
 
@@ -20,6 +20,6 @@ class User extends BaseController
             'account' => $this->authModel->getAccount(session()->get('email'))
         ];
 
-        return view('user/index', $data);
+        return view('renter/myProfile', $data);
     }
 }

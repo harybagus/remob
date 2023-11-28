@@ -29,7 +29,7 @@
         <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/user">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/renter">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-car"></i>
                 </div>

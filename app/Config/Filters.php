@@ -26,7 +26,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'admin'         => \App\Filters\AdminFilter::class,
-        'user'          => \App\Filters\UserFilter::class,
+        'renter'          => \App\Filters\RenterFilter::class,
     ];
 
     /**
@@ -47,7 +47,7 @@ class Filters extends BaseConfig
                     'auth/*'
                 ]
             ],
-            'user' => [
+            'renter' => [
                 'except' => [
                     'auth',
                     'auth/*'
@@ -64,10 +64,10 @@ class Filters extends BaseConfig
                     'admin/*'
                 ]
             ],
-            'user' => [
+            'renter' => [
                 'except' => [
-                    'user',
-                    'user/*'
+                    'renter',
+                    'renter/*'
                 ]
             ]
         ],
