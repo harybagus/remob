@@ -2,22 +2,22 @@
 
 namespace App\Controllers;
 
-use App\Models\AuthModel;
+use App\Models\AdminAccountModel;
 
 class AdminAccount extends BaseController
 {
-    protected $authModel;
+    protected $adminAccountModel;
 
     public function __construct()
     {
-        $this->authModel = new AuthModel();
+        $this->adminAccountModel = new AdminAccountModel();
     }
 
     public function index()
     {
         $data = [
             'title' => 'Tambah Data Admin',
-            'account' => $this->authModel->getAccount(session()->get('email'))
+            'account' => $this->adminAccountModel->getAccount(session()->get('email'))
         ];
 
         return view('admin/adminAccount/create', $data);
@@ -33,7 +33,7 @@ class AdminAccount extends BaseController
                 ]
             ],
             'email' => [
-                'rules' => 'required|valid_email|is_unique[user.email]',
+                'rules' => 'required|valid_email|is_unique[admin.email]',
                 'errors' => [
                     'required' => 'Alamat email harus diisi.',
                     'valid_email' => 'Alamat email tidak valid.',
@@ -60,13 +60,11 @@ class AdminAccount extends BaseController
             $image->move('assets/img/profile', $imageName);
         }
 
-        $this->authModel->save([
+        $this->adminAccountModel->save([
             'name' => $this->request->getVar('name'),
             'email' => $this->request->getVar('email'),
             'image' => $imageName,
-            'password' => password_hash(123123123, PASSWORD_DEFAULT),
-            'role_id' => 1,
-            'date_created' => time()
+            'password' => password_hash(123123123, PASSWORD_DEFAULT)
         ]);
 
         session()->setFlashdata('successMessage', 'Data berhasil ditambahkan');
@@ -77,8 +75,8 @@ class AdminAccount extends BaseController
     {
         $data = [
             'title' => 'Ubah Data Admin',
-            'account' => $this->authModel->getAccount(session()->get('email')),
-            'updatedAccount' => $this->authModel->getAccountById($id)
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
+            'updatedAccount' => $this->adminAccountModel->getAccountById($id)
         ];
 
         return view('admin/adminAccount/update', $data);
@@ -116,7 +114,7 @@ class AdminAccount extends BaseController
             }
         }
 
-        $this->authModel->save([
+        $this->adminAccountModel->save([
             'id' => $id,
             'name' => $this->request->getVar('name'),
             'image' => $imageName
@@ -128,13 +126,13 @@ class AdminAccount extends BaseController
 
     public function delete($id)
     {
-        $account = $this->authModel->getAccountById($id);
+        $account = $this->adminAccountModel->getAccountById($id);
 
         if ($account['image'] != 'default.jpg') {
             unlink('assets/img/profile/' . $account['image']);
         }
 
-        $this->authModel->delete($id);
+        $this->adminAccountModel->delete($id);
 
         session()->setFlashdata('successMessage', 'Data berhasil dihapus');
         return redirect()->to(base_url('admin/account'));

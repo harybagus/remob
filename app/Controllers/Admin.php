@@ -2,17 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\AuthModel;
+use App\Models\AdminAccountModel;
+use App\Models\RenterAccountModel;
 use App\Models\CarModel;
 
 class Admin extends BaseController
 {
-    protected $authModel;
+    protected $adminAccountModel;
+    protected $renterAccountModel;
     protected $carModel;
 
     public function __construct()
     {
-        $this->authModel = new AuthModel();
+        $this->adminAccountModel = new AdminAccountModel();
+        $this->renterAccountModel = new RenterAccountModel();
         $this->carModel = new CarModel();
     }
 
@@ -20,7 +23,7 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Dashboard',
-            'account' => $this->authModel->getAccount(session()->get('email'))
+            'account' => $this->adminAccountModel->getAccount(session()->get('email'))
         ];
 
         return view('admin/index', $data);
@@ -30,8 +33,8 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Kelola Akun',
-            'account' => $this->authModel->getAccount(session()->get('email')),
-            'adminAccount' => $this->authModel->getAdminAccount(session()->get('email'))
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
+            'adminAccount' => $this->adminAccountModel->getAllAccount()
         ];
 
         return view('admin/account', $data);
@@ -41,8 +44,8 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Data Penyewa',
-            'account' => $this->authModel->getAccount(session()->get('email')),
-            'renterAccount' => $this->authModel->getRenterAccount(session()->get('email'))
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
+            'renterAccount' => $this->renterAccountModel->getAllAccount()
         ];
 
         return view('admin/renterData', $data);
@@ -52,7 +55,7 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Data Mobil',
-            'account' => $this->authModel->getAccount(session()->get('email')),
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
             'car' => $this->carModel->getCar()
         ];
 
@@ -63,7 +66,7 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Ubah Password',
-            'account' => $this->authModel->getAccount(session()->get('email'))
+            'account' => $this->adminAccountModel->getAccount(session()->get('email'))
         ];
 
         return view('admin/changePassword', $data);
@@ -96,7 +99,7 @@ class Admin extends BaseController
             return redirect()->to(base_url('admin/change-password'));
         }
 
-        $account = $this->authModel->getAccount(session()->get('email'));
+        $account = $this->adminAccountModel->getAccount(session()->get('email'));
 
         $currentPassword = $this->request->getVar('current-password');
         $newPassword = $this->request->getVar('new-password');
@@ -111,7 +114,7 @@ class Admin extends BaseController
             }
         }
 
-        $this->authModel->save([
+        $this->adminAccountModel->save([
             'id' => $account['id'],
             'password' => password_hash($newPassword, PASSWORD_DEFAULT)
         ]);

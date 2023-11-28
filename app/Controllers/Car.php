@@ -2,17 +2,17 @@
 
 namespace App\Controllers;
 
-use App\Models\AuthModel;
+use App\Models\AdminAccountModel;
 use App\Models\CarModel;
 
 class Car extends BaseController
 {
-    protected $authModel;
+    protected $adminAccountModel;
     protected $carModel;
 
     public function __construct()
     {
-        $this->authModel = new AuthModel();
+        $this->adminAccountModel = new AdminAccountModel();
         $this->carModel = new CarModel();
     }
 
@@ -20,8 +20,7 @@ class Car extends BaseController
     {
         $data = [
             'title' => 'Tambah Data Mobil',
-            'account' => $this->authModel->getAccount(session()->get('email')),
-            'car' => $this->carModel->getCar()
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
         ];
 
         return view('admin/car/create', $data);
@@ -111,7 +110,7 @@ class Car extends BaseController
     {
         $data = [
             'title' => 'Ubah Data Mobil',
-            'account' => $this->authModel->getAccount(session()->get('email')),
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
             'car' => $this->carModel->getCarById($id)
         ];
 

@@ -39,8 +39,8 @@
             <!-- Query Menu -->
             <?php
             $db = db_connect();
-            $queryMenu = "SELECT * FROM `menu` WHERE `role_id` = ?";
-            $menu = $db->query($queryMenu, session()->get('role_id'))->getResultArray();
+            $queryMenu = "SELECT * FROM `menu`";
+            $menu = $db->query($queryMenu)->getResultArray();
             ?>
 
             <?php foreach ($menu as $menu) : ?>
@@ -54,8 +54,8 @@
 
                 <!-- Submenu sesuai menu -->
                 <?php
-                $querySubmenu = "SELECT * FROM `sub_menu` WHERE `menu_id` = ?";
-                $submenu = $db->query($querySubmenu, $menu['id'])->getResultArray();
+                $querySubmenu = "SELECT * FROM `sub_menu` WHERE `menu_id` = ? AND `role` = ?";
+                $submenu = $db->query($querySubmenu, [$menu['id'], session()->get('role')])->getResultArray();
                 ?>
 
                 <?php foreach ($submenu as $submenu) : ?>

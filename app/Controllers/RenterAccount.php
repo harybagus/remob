@@ -2,22 +2,25 @@
 
 namespace App\Controllers;
 
-use App\Models\AuthModel;
+use App\Models\AdminAccountModel;
+use App\Models\RenterAccountModel;
 
 class RenterAccount extends BaseController
 {
-    protected $authModel;
+    protected $adminAccountModel;
+    protected $renterAccountModel;
 
     public function __construct()
     {
-        $this->authModel = new AuthModel();
+        $this->adminAccountModel = new AdminAccountModel();
+        $this->renterAccountModel = new RenterAccountModel();
     }
 
     public function index()
     {
         $data = [
             'title' => 'Tambah Data Penyewa',
-            'account' => $this->authModel->getAccount(session()->get('email'))
+            'account' => $this->adminAccountModel->getAccount(session()->get('email'))
         ];
 
         return view('admin/renterAccount/create', $data);
@@ -33,7 +36,7 @@ class RenterAccount extends BaseController
                 ]
             ],
             'email' => [
-                'rules' => 'required|valid_email|is_unique[user.email]',
+                'rules' => 'required|valid_email|is_unique[renter.email]',
                 'errors' => [
                     'required' => 'Alamat email harus diisi.',
                     'valid_email' => 'Alamat email tidak valid.',
@@ -60,12 +63,11 @@ class RenterAccount extends BaseController
             $image->move('assets/img/profile', $imageName);
         }
 
-        $this->authModel->save([
+        $this->renterAccountModel->save([
             'name' => $this->request->getVar('name'),
             'email' => $this->request->getVar('email'),
             'image' => $imageName,
             'password' => password_hash(321321321, PASSWORD_DEFAULT),
-            'role_id' => 2,
             'date_created' => time()
         ]);
 
@@ -77,8 +79,8 @@ class RenterAccount extends BaseController
     {
         $data = [
             'title' => 'Ubah Data Penyewa',
-            'account' => $this->authModel->getAccount(session()->get('email')),
-            'updatedAccount' => $this->authModel->getAccountById($id)
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
+            'updatedAccount' => $this->renterAccountModel->getAccountById($id)
         ];
 
         return view('admin/renterAccount/update', $data);
@@ -116,7 +118,7 @@ class RenterAccount extends BaseController
             }
         }
 
-        $this->authModel->save([
+        $this->renterAccountModel->save([
             'id' => $id,
             'name' => $this->request->getVar('name'),
             'image' => $imageName
@@ -128,13 +130,13 @@ class RenterAccount extends BaseController
 
     public function delete($id)
     {
-        $account = $this->authModel->getAccountById($id);
+        $account = $this->renterAccountModel->getAccountById($id);
 
         if ($account['image'] != 'default.jpg') {
             unlink('assets/img/profile/' . $account['image']);
         }
 
-        $this->authModel->delete($id);
+        $this->renterAccountModel->delete($id);
 
         session()->setFlashdata('successMessage', 'Data berhasil dihapus');
         return redirect()->to(base_url('admin/renter'));

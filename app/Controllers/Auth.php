@@ -2,15 +2,18 @@
 
 namespace App\Controllers;
 
-use App\Models\AuthModel;
+use App\Models\AdminAccountModel;
+use App\Models\RenterAccountModel;
 
 class Auth extends BaseController
 {
-    protected $authModel;
+    protected $adminAccountModel;
+    protected $renterAccountModel;
 
     public function __construct()
     {
-        $this->authModel = new AuthModel();
+        $this->adminAccountModel = new AdminAccountModel();
+        $this->renterAccountModel = new RenterAccountModel();
     }
 
     public function index()
@@ -44,24 +47,37 @@ class Auth extends BaseController
 
         $db = db_connect();
 
-        $sql = 'SELECT * FROM user WHERE email = ?';
-        $user = $db->query($sql, $email)->getRowArray();
+        $sqlAccountAdmin = 'SELECT * FROM admin WHERE email = ?';
+        $sqlAccountRenter = 'SELECT * FROM renter WHERE email = ?';
 
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                $data = [
-                    'email' => $user['email'],
-                    'role_id' => $user['role_id']
-                ];
-                session()->set($data);
-                if ($user['role_id'] == 1) {
+        $accountAdmin = $db->query($sqlAccountAdmin, $email)->getRowArray();
+        $accountRenter = $db->query($sqlAccountRenter, $email)->getRowArray();
+
+        if ($accountAdmin || $accountRenter) {
+            if ($accountAdmin) {
+                if (password_verify($password, $accountAdmin['password'])) {
+                    $data = [
+                        'email' => $accountAdmin['email'],
+                        'role' => 'admin'
+                    ];
+                    session()->set($data);
                     return redirect()->to(base_url('admin'));
                 } else {
-                    return redirect()->to(base_url('renter'));
+                    session()->setFlashdata('errorMessage', 'Password salah!');
+                    return redirect()->to(base_url('auth'))->withInput();
                 }
             } else {
-                session()->setFlashdata('errorMessage', 'Password salah!');
-                return redirect()->to(base_url('auth'))->withInput();
+                if (password_verify($password, $accountRenter['password'])) {
+                    $data = [
+                        'email' => $accountRenter['email'],
+                        'role' => 'renter'
+                    ];
+                    session()->set($data);
+                    return redirect()->to(base_url('renter'));
+                } else {
+                    session()->setFlashdata('errorMessage', 'Password salah!');
+                    return redirect()->to(base_url('auth'))->withInput();
+                }
             }
         } else {
             session()->setFlashdata('errorMessage', 'Email belum terdaftar!');
@@ -85,7 +101,7 @@ class Auth extends BaseController
                 ]
             ],
             'email' => [
-                'rules' => 'required|valid_email|is_unique[user.email]',
+                'rules' => 'required|valid_email|is_unique[renter.email]',
                 'errors' => [
                     'required' => 'Alamat email harus diisi.',
                     'valid_email' => 'Alamat email tidak valid.',
@@ -110,12 +126,11 @@ class Auth extends BaseController
             return redirect()->to(base_url('auth/registration'))->withInput();
         }
 
-        $this->authModel->save([
+        $this->renterAccountModel->save([
             'name' => $this->request->getVar('name'),
             'email' => $this->request->getVar('email'),
-            'image' => 'default.jpg',
             'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-            'role_id' => 2,
+            'image' => 'default.jpg',
             'date_created' => time()
         ]);
 

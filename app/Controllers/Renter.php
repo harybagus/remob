@@ -2,22 +2,22 @@
 
 namespace App\Controllers;
 
-use App\Models\AuthModel;
+use App\Models\RenterAccountModel;
 
 class Renter extends BaseController
 {
-    protected $authModel;
+    protected $renterAccountModelModel;
 
     public function __construct()
     {
-        $this->authModel = new AuthModel();
+        $this->renterAccountModelModel = new RenterAccountModel();
     }
 
     public function index()
     {
         $data = [
             'title' => 'Profil Saya',
-            'account' => $this->authModel->getAccount(session()->get('email'))
+            'account' => $this->renterAccountModelModel->getAccount(session()->get('email'))
         ];
 
         return view('renter/myProfile', $data);
