@@ -38,3 +38,4 @@ $routes->get('/admin/car/delete/(:num)', 'Car::delete/$1');
 
 $routes->get('/renter', 'Renter::index');
 $routes->post('/renter/account/update/(:num)', 'Renter::updateAccount/$1');
+$routes->post('/renter/change-password', 'Renter::changePassword');

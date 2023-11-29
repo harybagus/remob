@@ -64,4 +64,55 @@ class Renter extends BaseController
         session()->setFlashdata('successMessage', 'Data berhasil diubah');
         return redirect()->to(base_url('renter'));
     }
+
+    public function changePassword()
+    {
+        if (!$this->validate([
+            'current-password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Password saat ini harus diisi.'
+                ]
+            ],
+            'new-password' => [
+                'rules' => 'required|min_length[8]|matches[confirm-password]',
+                'errors' => [
+                    'required' => 'Password baru harus diisi.',
+                    'min_length' => 'Password baru harus berisi minimal 8 karakter.',
+                    'matches' => 'Password baru dan confirm password tidak sama.'
+                ]
+            ],
+            'confirm-password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Confirm password harus diisi.'
+                ]
+            ]
+        ])) {
+            return redirect()->to(base_url('renter'));
+        }
+
+        $account = $this->renterAccountModel->getAccount(session()->get('email'));
+
+        $currentPassword = $this->request->getVar('current-password');
+        $newPassword = $this->request->getVar('new-password');
+
+        if (!password_verify($currentPassword, $account['password'])) {
+            session()->setFlashdata('errorMessage', 'Password saat ini salah!');
+            return redirect()->to(base_url('renter'));
+        } else {
+            if ($currentPassword == $newPassword) {
+                session()->setFlashdata('errorMessage', 'Password saat ini dan password baru tidak boleh sama!');
+                return redirect()->to(base_url('renter'));
+            }
+        }
+
+        $this->renterAccountModel->save([
+            'id' => $account['id'],
+            'password' => password_hash($newPassword, PASSWORD_DEFAULT)
+        ]);
+
+        session()->setFlashdata('successMessage', 'Password berhasil diubah');
+        return redirect()->to(base_url('renter'));
+    }
 }

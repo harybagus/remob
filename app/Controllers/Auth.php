@@ -141,7 +141,7 @@ class Auth extends BaseController
     public function logout()
     {
         session()->remove('email');
-        session()->remove('role_id');
+        session()->remove('role');
 
         session()->setFlashdata('successMessage', 'Anda telah logout! terimakasih sudah mengunjungi ReMob');
         return redirect()->to(base_url('auth'));
