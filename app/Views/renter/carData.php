@@ -54,21 +54,6 @@
 
         <div class="dropdown-divider mb-3"></div>
 
-        <?php if (session()->getFlashdata('successMessage')) : ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('successMessage'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
-
-        <!-- Button trigger modal -->
-        <a href="/admin/car/create" class="btn btn-info mb-3">
-            <i class="fas fa-car"></i>
-            Tambah data mobil
-        </a>
-
         <div class="row row-cols-1 row-cols-md-3">
             <?php foreach ($car as $car) : ?>
                 <div class="col mb-4">
@@ -76,11 +61,8 @@
                         <div class="card-header">
                             <h6 class="float-left pt-2"><?= $car['name']; ?></h6>
                             <div class="float-right">
-                                <a href="/admin/car/update/<?= $car['id']; ?>" class="btn btn-warning">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="/admin/car/delete/<?= $car['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data admin?')">
-                                    <i class="fas fa-trash-alt"></i>
+                                <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info">
+                                    Sewa
                                 </a>
                             </div>
                         </div>

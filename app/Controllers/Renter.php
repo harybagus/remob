@@ -3,14 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\RenterAccountModel;
+use App\Models\CarModel;
 
 class Renter extends BaseController
 {
     protected $renterAccountModel;
+    protected $carModel;
 
     public function __construct()
     {
         $this->renterAccountModel = new RenterAccountModel();
+        $this->carModel = new CarModel();
     }
 
     public function index()
@@ -114,5 +117,16 @@ class Renter extends BaseController
 
         session()->setFlashdata('successMessage', 'Password berhasil diubah');
         return redirect()->to(base_url('renter'));
+    }
+
+    public function carData()
+    {
+        $data = [
+            'title' => 'Data Mobil',
+            'account' => $this->renterAccountModel->getAccount(session()->get('email')),
+            'car' => $this->carModel->getCar()
+        ];
+
+        return view('renter/carData', $data);
     }
 }
