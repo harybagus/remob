@@ -26,13 +26,39 @@ class Renter extends BaseController
         return view('renter/myProfile', $data);
     }
 
-    public function updateAccount($id)
+    public function save($id)
     {
         if (!$this->validate([
             'name' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Nama lengkap harus diisi.'
+                ]
+            ],
+            'mobile-phone-number' => [
+                'rules' => 'required|numeric|max_length[13]',
+                'errors' => [
+                    'required' => 'Nomor handphone harus diisi.',
+                    'numeric' => 'Nomor handphone harus berisi angka.',
+                    'max_length' => 'Nomor handphone maksimal 13 angka.'
+                ]
+            ],
+            'ktp-image' => [
+                'rules' => 'uploaded[ktp-image]|max_size[image,1024]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => 'Anda belum meng-upload foto KTP.',
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'Yang Anda pilih bukan gambar.',
+                    'mime_in' => 'Yang Anda pilih bukan gambar.'
+                ]
+            ],
+            'sim-image' => [
+                'rules' => 'uploaded[sim-image]|max_size[image,1024]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => 'Anda belum meng-upload foto SIM.',
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'Yang Anda pilih bukan gambar.',
+                    'mime_in' => 'Yang Anda pilih bukan gambar.'
                 ]
             ],
             'image' => [
@@ -45,6 +71,20 @@ class Renter extends BaseController
             ]
         ])) {
             return redirect()->to(base_url('renter'))->withInput();
+        }
+
+        $ktpImage = $this->request->getFile('ktp-image');
+        $ktpImageName = $ktpImage->getRandomName();
+        $ktpImage->move('assets/img/ktp', $ktpImageName);
+        if ($this->request->getVar('old-ktp-image') != '') {
+            unlink('assets/img/ktp/' . $this->request->getVar('old-ktp-image'));
+        }
+
+        $simImage = $this->request->getFile('sim-image');
+        $simImageName = $simImage->getRandomName();
+        $simImage->move('assets/img/sim', $simImageName);
+        if ($this->request->getVar('old-sim-image') != '') {
+            unlink('assets/img/sim/' . $this->request->getVar('old-sim-image'));
         }
 
         $image = $this->request->getFile('image');
@@ -61,10 +101,13 @@ class Renter extends BaseController
         $this->renterAccountModel->save([
             'id' => $id,
             'name' => $this->request->getVar('name'),
+            'mobile_phone_number' => $this->request->getVar('mobile-phone-number'),
+            'ktp_image' => $ktpImageName,
+            'sim_image' => $simImageName,
             'image' => $imageName
         ]);
 
-        session()->setFlashdata('successMessage', 'Data berhasil diubah');
+        session()->setFlashdata('successMessage', 'Data diri berhasil disimpan');
         return redirect()->to(base_url('renter'));
     }
 

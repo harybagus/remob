@@ -61,7 +61,11 @@
                         <div class="card-header">
                             <h6 class="float-left pt-2"><?= $car['name']; ?></h6>
                             <div class="float-right">
-                                <?php if ($car['number_of_cars'] >= 1) : ?>
+                                <?php if ($account['mobile_phone_number'] == "" || $account['ktp_image'] == "" || $account['sim_image'] == "") : ?>
+                                    <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info" data-toggle="modal" data-target="#dataIsIncompleteModal">
+                                        Sewa
+                                    </a>
+                                <?php elseif ($car['number_of_cars'] >= 1) : ?>
                                     <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info">
                                         Sewa
                                     </a>
@@ -130,12 +134,29 @@
 <!-- End of Main Content -->
 
 <!-- Logout Modal-->
+<div class="modal fade" id="dataIsIncompleteModal" tabindex="-1" role="dialog" aria-labelledby="dataIsIncompleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dataIsIncompleteModalLabel">Anda belum melengkapi data diri!</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-info" href="/renter">Lengkapi sekarang!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Modal-->
 <div class="modal fade" id="notAvailableModal" tabindex="-1" role="dialog" aria-labelledby="notAvailableModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-danger" id="notAvailableModalLabel">Mobil tidak tersedia!</h5>
-                <button class="close text-danger" type="button" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="notAvailableModalLabel">Mobil tidak tersedia!</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

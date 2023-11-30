@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class RenterAccountModel extends Model
 {
     protected $table = 'renter';
-    protected $allowedFields = ['name', 'email', 'image', 'password', 'date_created'];
+    protected $allowedFields = ['name', 'email', 'image', 'password', 'mobile_phone_number', 'ktp_image', 'sim_image', 'date_created'];
 
     public function getAccount($email)
     {

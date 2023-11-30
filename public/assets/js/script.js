@@ -18,6 +18,46 @@ if (image != null) {
     });
 }
 
+const ktpImageLabel = document.querySelector('#ktp-img-label');
+const colKtpImagePreview = document.querySelector('#col-ktp-img-preview');
+const ktpImage = document.querySelector('#ktp-image');
+const ktpImagePreview = document.querySelector('.ktp-img-preview');
+
+if (ktpImage != null) {
+    ktpImage.addEventListener('change', function () {
+        const [file] = ktpImage.files;
+        ktpImagePreview.src = URL.createObjectURL(file);
+
+        if (colKtpImagePreview && ktpImageLabel) {
+            colKtpImagePreview.classList.remove('d-none');
+            ktpImageLabel.classList.add('d-none')
+        }
+
+        var fileName = $(this).val().replace('C:\\fakepath\\', " ");
+        $(this).next('.custom-file-label').html(fileName);
+    });
+}
+
+const simImageLabel = document.querySelector('#sim-img-label');
+const colSimImagePreview = document.querySelector('#col-sim-img-preview');
+const simImage = document.querySelector('#sim-image');
+const simImagePreview = document.querySelector('.sim-img-preview');
+
+if (simImage != null) {
+    simImage.addEventListener('change', function () {
+        const [file] = simImage.files;
+        simImagePreview.src = URL.createObjectURL(file);
+
+        if (colSimImagePreview && simImageLabel) {
+            colSimImagePreview.classList.remove('d-none');
+            simImageLabel.classList.add('d-none')
+        }
+
+        var fileName = $(this).val().replace('C:\\fakepath\\', " ");
+        $(this).next('.custom-file-label').html(fileName);
+    });
+}
+
 function formatRupiah(number, prefix) {
     let number_string = number.replace(/[^,\d]/g, '').toString(),
         split = number_string.split(','),

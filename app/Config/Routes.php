@@ -37,6 +37,6 @@ $routes->post('/admin/car/edit/(:num)', 'Car::edit/$1');
 $routes->get('/admin/car/delete/(:num)', 'Car::delete/$1');
 
 $routes->get('/renter', 'Renter::index');
-$routes->post('/renter/account/update/(:num)', 'Renter::updateAccount/$1');
+$routes->post('/renter/save/(:num)', 'Renter::save/$1');
 $routes->post('/renter/change-password', 'Renter::changePassword');
 $routes->get('/renter/car', 'Renter::carData');

@@ -50,6 +50,15 @@
 
         <div class="dropdown-divider mb-3"></div>
 
+        <?php if ($account['mobile_phone_number'] == "" || $account['ktp_image'] == "" || $account['sim_image'] == "") : ?>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                Selamat datang di ReMob, sebelum menyewa mobil Anda harus <strong>melengkapi data diri</strong> terlebih dahulu!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
@@ -88,7 +97,7 @@
         <?php endif; ?>
 
         <!-- Card Profile -->
-        <div class="d-flex mb-3">
+        <div class="d-flex mb-4">
             <div class="float-left w-100">
                 <div class="card mb-3 mr-3 border-info">
                     <div class="row">
@@ -131,10 +140,19 @@
 
             <div class="float-right w-100">
                 <div class="card border-info">
-                    <h5 class="card-header">Ubah Profil</h5>
+                    <div class="card-header">
+                        <h5 class="float-left mb-0">Data Diri</h5>
+                        <?php if ($account['mobile_phone_number'] != "" && $account['ktp_image'] != "" && $account['sim_image'] != "") : ?>
+                            <p class="float-right mb-0 text-info"><small>Data diri sudah lengkap</small></p>
+                        <?php else : ?>
+                            <p class="float-right mb-0 text-danger"><small>Data diri belum lengkap</small></p>
+                        <?php endif; ?>
+                    </div>
                     <div class="card-body">
-                        <form action="/renter/account/update/<?= $account['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+                        <form action="/renter/save/<?= $account['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
                             <?= csrf_field(); ?>
+                            <input type="hidden" name="old-ktp-image" value="<?= $account['ktp_image']; ?>">
+                            <input type="hidden" name="old-sim-image" value="<?= $account['sim_image']; ?>">
                             <input type="hidden" name="old-image" value="<?= $account['image']; ?>">
                             <div class="form-group">
                                 <label for="name">Nama lengkap</label>
@@ -143,6 +161,46 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="text" class="form-control" id="email" name="email" value="<?= old('email', $account['email']); ?>" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile-phone-number">Nomor handphone</label>
+                                <input type="text" class="form-control" id="mobile-phone-number" name="mobile-phone-number" value="<?= old('mobile-phone-number', $account['mobile_phone_number']); ?>">
+                            </div>
+                            <div class="row mb-3">
+                                <?php if ($account['ktp_image'] != "") : ?>
+                                    <div class="col-sm-4">
+                                        <img src="/assets/img/ktp/<?= $account['ktp_image']; ?>" alt="<?= $account['name']; ?>" class="img-thumbnail img-preview">
+                                    </div>
+                                <?php else : ?>
+                                    <label for="ktp-image" class="col-sm-4 col-form-label" id="ktp-img-label">Foto KTP</label>
+                                    <div class="col-sm-4 d-none" id="col-ktp-img-preview">
+                                        <img src="" alt="KTP Image" class="img-thumbnail ktp-img-preview">
+                                    </div>
+                                <?php endif; ?>
+                                <div class="col-sm-8">
+                                    <div class="custom-file">
+                                        <input type="file" accept="image/*" class="custom-file-input" id="ktp-image" name="ktp-image" aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="ktp-image">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <?php if ($account['sim_image'] != "") : ?>
+                                    <div class="col-sm-4">
+                                        <img src="/assets/img/sim/<?= $account['sim_image']; ?>" alt="<?= $account['name']; ?>" class="img-thumbnail img-preview">
+                                    </div>
+                                <?php else : ?>
+                                    <label for="sim-image" class="col-sm-4 col-form-label" id="sim-img-label">Foto SIM</label>
+                                    <div class="col-sm-4 d-none" id="col-sim-img-preview">
+                                        <img src="" alt="SIM Image" class="img-thumbnail sim-img-preview">
+                                    </div>
+                                <?php endif; ?>
+                                <div class="col-sm-8">
+                                    <div class="custom-file">
+                                        <input type="file" accept="image/*" class="custom-file-input" id="sim-image" name="sim-image" aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="sim-image">Choose file</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-4">
@@ -155,7 +213,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-info">Ubah profil</button>
+                            <button type="submit" class="btn btn-info">Simpan</button>
                             <button type="reset" class="btn btn-secondary">Batal</button>
                         </form>
                     </div>

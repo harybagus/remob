@@ -132,7 +132,11 @@ class RenterAccount extends BaseController
     {
         $account = $this->renterAccountModel->getAccountById($id);
 
-        if ($account['image'] != 'default.jpg') {
+        if ($account['ktp_image'] != '') {
+            unlink('assets/img/ktp/' . $account['ktp_image']);
+        } elseif ($account['sim_image'] != '') {
+            unlink('assets/img/sim/' . $account['sim_image']);
+        } elseif ($account['image'] != 'default.jpg') {
             unlink('assets/img/profile/' . $account['image']);
         }
 
