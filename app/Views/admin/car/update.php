@@ -86,9 +86,17 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="license-plate" class="col-sm-2 col-form-label">Nomor polisi</label>
+                <label for="transmission" class="col-sm-2 col-form-label">Transmisi</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="license-plate" name="license-plate" value="<?= old('license-plate', $car['license_plate']); ?>">
+                    <select id="transmission" name="transmission" class="form-control">
+                        <?php if ($car['transmission'] == 'Manual') : ?>
+                            <option selected value="<?= $car['transmission']; ?>"><?= $car['transmission']; ?></option>
+                            <option value="Matik">Matik</option>
+                        <?php else : ?>
+                            <option selected value="<?= $car['transmission']; ?>"><?= $car['transmission']; ?></option>
+                            <option value="Manual">Manual</option>
+                        <?php endif; ?>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
@@ -98,9 +106,9 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="production-year" class="col-sm-2 col-form-label">Tahun produksi</label>
+                <label for="number-of-cars" class="col-sm-2 col-form-label">Jumlah mobil</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="production-year" name="production-year" value="<?= old('production-year', $car['production_year']); ?>">
+                    <input type="text" class="form-control" id="number-of-cars" name="number-of-cars" value="<?= old('number-of-cars', $car['number_of_cars']); ?>">
                 </div>
             </div>
             <div class="row mb-3">
@@ -120,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <button type="submit" class="btn btn-info">Ubah data</button>
                 <a href="/admin/car" class="btn btn-secondary">Batal</a>
             </div>

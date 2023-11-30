@@ -98,9 +98,9 @@
                                 </tbody>
                                 <tbody>
                                     <tr>
-                                        <td>Nomor polisi</td>
+                                        <td>Transmisi</td>
                                         <td>:</td>
-                                        <th><?= $car['license_plate']; ?></th>
+                                        <th><?= $car['transmission']; ?></th>
                                     </tr>
                                 </tbody>
                                 <tbody>
@@ -112,9 +112,9 @@
                                 </tbody>
                                 <tbody>
                                     <tr>
-                                        <td>Tahun produksi</td>
+                                        <td>Jumlah mobil</td>
                                         <td>:</td>
-                                        <th><?= $car['production_year']; ?></th>
+                                        <th><?= $car['number_of_cars']; ?></th>
                                     </tr>
                                 </tbody>
                                 <tbody>

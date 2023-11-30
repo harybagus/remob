@@ -41,28 +41,28 @@ class Car extends BaseController
                     'required' => 'Merk harus diisi.'
                 ]
             ],
-            'license-plate' => [
-                'rules' => 'required|max_length[11]',
+            'transmission' => [
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nomor polisi harus diisi.',
-                    'max_length' => 'Nomor polisi maksimal 11 karakter'
+                    'required' => 'Transmisi harus dipilih.'
                 ]
             ],
             'seat' => [
-                'rules' => 'required|max_length[1]|numeric',
+                'rules' => 'required|max_length[1]|greater_than[1]|numeric',
                 'errors' => [
                     'required' => 'Jumlah kursi harus diisi.',
                     'max_length' => 'Jumlah kursi maksimal 1 angka',
+                    'greater_than' => 'Jumlah kursi minimal 2',
                     'numeric' => 'Jumlah kursi harus berisi angka'
                 ]
             ],
-            'production-year' => [
-                'rules' => 'required|max_length[4]|min_length[4]|numeric',
+            'number-of-cars' => [
+                'rules' => 'required|max_length[1]|greater_than[0]|numeric',
                 'errors' => [
-                    'required' => 'Tahun produksi harus diisi.',
-                    'max_length' => 'Tahun produksi maksimal 4 angka',
-                    'min_length' => 'Tahun produksi minimal 4 angka',
-                    'numeric' => 'Tahun produksi harus berisi angka'
+                    'required' => 'Jumlah mobil harus diisi.',
+                    'max_length' => 'Jumlah mobil maksimal 1 angka',
+                    'greater_than' => 'Jumlah mobil minimal 1',
+                    'numeric' => 'Jumlah mobil harus berisi angka'
                 ]
             ],
             'rental-price-per-day' => [
@@ -95,9 +95,9 @@ class Car extends BaseController
         $this->carModel->save([
             'name' => $this->request->getVar('name'),
             'merk' => $this->request->getVar('merk'),
-            'license_plate' => $this->request->getVar('license-plate'),
+            'transmission' => $this->request->getVar('transmission'),
             'seat' => $this->request->getVar('seat'),
-            'production_year' => $this->request->getVar('production-year'),
+            'number_of_cars' => $this->request->getVar('number-of-cars'),
             'rental_price_per_day' => $price,
             'image' => $imageName
         ]);
@@ -132,28 +132,28 @@ class Car extends BaseController
                     'required' => 'Merk harus diisi.'
                 ]
             ],
-            'license-plate' => [
-                'rules' => 'required|max_length[11]',
+            'transmission' => [
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nomor polisi harus diisi.',
-                    'max_length' => 'Nomor polisi maksimal 11 karakter'
+                    'required' => 'Transmisi harus dipilih.'
                 ]
             ],
             'seat' => [
-                'rules' => 'required|max_length[1]|numeric',
+                'rules' => 'required|max_length[1]|greater_than[1]|numeric',
                 'errors' => [
                     'required' => 'Jumlah kursi harus diisi.',
                     'max_length' => 'Jumlah kursi maksimal 1 angka',
+                    'greater_than' => 'Jumlah kursi minimal 2',
                     'numeric' => 'Jumlah kursi harus berisi angka'
                 ]
             ],
-            'production-year' => [
-                'rules' => 'required|max_length[4]|min_length[4]|numeric',
+            'number-of-cars' => [
+                'rules' => 'required|max_length[1]|greater_than[0]|numeric',
                 'errors' => [
-                    'required' => 'Tahun produksi harus diisi.',
-                    'max_length' => 'Tahun produksi maksimal 4 angka',
-                    'min_length' => 'Tahun produksi minimal 4 angka',
-                    'numeric' => 'Tahun produksi harus berisi angka'
+                    'required' => 'Jumlah mobil harus diisi.',
+                    'max_length' => 'Jumlah mobil maksimal 1 angka',
+                    'greater_than' => 'Jumlah mobil minimal 1',
+                    'numeric' => 'Jumlah mobil harus berisi angka'
                 ]
             ],
             'rental-price-per-day' => [
@@ -191,9 +191,9 @@ class Car extends BaseController
             'id' => $id,
             'name' => $this->request->getVar('name'),
             'merk' => $this->request->getVar('merk'),
-            'license_plate' => $this->request->getVar('license-plate'),
+            'transmission' => $this->request->getVar('transmission'),
             'seat' => $this->request->getVar('seat'),
-            'production_year' => $this->request->getVar('production-year'),
+            'number_of_cars' => $this->request->getVar('number-of-cars'),
             'rental_price_per_day' => $price,
             'image' => $imageName
         ]);

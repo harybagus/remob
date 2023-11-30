@@ -85,9 +85,13 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="license-plate" class="col-sm-2 col-form-label">Nomor polisi</label>
+                <label for="transmission" class="col-sm-2 col-form-label">Transmisi</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="license-plate" name="license-plate" value="<?= old('license-plate'); ?>">
+                    <select id="transmission" name="transmission" class="custom-select">
+                        <option selected disabled value="">Pilih transmisi</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Matik">Matik</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
@@ -97,9 +101,9 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="production-year" class="col-sm-2 col-form-label">Tahun produksi</label>
+                <label for="number-of-cars" class="col-sm-2 col-form-label">Jumlah mobil</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="production-year" name="production-year" value="<?= old('production-year'); ?>">
+                    <input type="text" class="form-control" id="number-of-cars" name="number-of-cars" value="<?= old('number-of-cars'); ?>">
                 </div>
             </div>
             <div class="row mb-3">
@@ -120,8 +124,10 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-info mb-3">Tambah data</button>
-            <a href="/admin/car" class="btn btn-secondary mb-3">Batal</a>
+            <div class="mb-4">
+                <button type="submit" class="btn btn-info">Tambah data</button>
+                <a href="/admin/car" class="btn btn-secondary">Batal</a>
+            </div>
         </form>
 
     </div>
