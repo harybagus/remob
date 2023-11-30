@@ -51,18 +51,18 @@ class Car extends BaseController
                 'rules' => 'required|max_length[1]|greater_than[1]|numeric',
                 'errors' => [
                     'required' => 'Jumlah kursi harus diisi.',
-                    'max_length' => 'Jumlah kursi maksimal 1 angka',
-                    'greater_than' => 'Jumlah kursi minimal 2',
-                    'numeric' => 'Jumlah kursi harus berisi angka'
+                    'max_length' => 'Jumlah kursi maksimal 1 angka.',
+                    'greater_than' => 'Jumlah kursi minimal 2.',
+                    'numeric' => 'Jumlah kursi harus berisi angka.'
                 ]
             ],
             'number-of-cars' => [
                 'rules' => 'required|max_length[1]|greater_than[0]|numeric',
                 'errors' => [
                     'required' => 'Jumlah mobil harus diisi.',
-                    'max_length' => 'Jumlah mobil maksimal 1 angka',
-                    'greater_than' => 'Jumlah mobil minimal 1',
-                    'numeric' => 'Jumlah mobil harus berisi angka'
+                    'max_length' => 'Jumlah mobil maksimal 1 angka.',
+                    'greater_than' => 'Jumlah mobil minimal 1.',
+                    'numeric' => 'Jumlah mobil harus berisi angka.'
                 ]
             ],
             'rental-price-per-day' => [
@@ -75,9 +75,9 @@ class Car extends BaseController
                 'rules' => 'uploaded[image]|max_size[image,1024]|is_image[image]|mime_in[image,image/jpg,image,image/jpeg,image/png]',
                 'errors' => [
                     'uploaded' => 'Anda belum memilih gambar.',
-                    'max_size' => 'Ukuran gambar terlalu besar',
-                    'is_image' => 'Yang Anda pilih bukan gambar',
-                    'mime_in' => 'Ekstensi file tidak diizinkan'
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'Yang Anda pilih bukan gambar.',
+                    'mime_in' => 'Yang Anda pilih bukan gambar.'
                 ]
             ]
         ])) {
@@ -142,18 +142,18 @@ class Car extends BaseController
                 'rules' => 'required|max_length[1]|greater_than[1]|numeric',
                 'errors' => [
                     'required' => 'Jumlah kursi harus diisi.',
-                    'max_length' => 'Jumlah kursi maksimal 1 angka',
-                    'greater_than' => 'Jumlah kursi minimal 2',
-                    'numeric' => 'Jumlah kursi harus berisi angka'
+                    'max_length' => 'Jumlah kursi maksimal 1 angka.',
+                    'greater_than' => 'Jumlah kursi minimal 2.',
+                    'numeric' => 'Jumlah kursi harus berisi angka.'
                 ]
             ],
             'number-of-cars' => [
                 'rules' => 'required|max_length[1]|greater_than[0]|numeric',
                 'errors' => [
                     'required' => 'Jumlah mobil harus diisi.',
-                    'max_length' => 'Jumlah mobil maksimal 1 angka',
-                    'greater_than' => 'Jumlah mobil minimal 1',
-                    'numeric' => 'Jumlah mobil harus berisi angka'
+                    'max_length' => 'Jumlah mobil maksimal 1 angka.',
+                    'greater_than' => 'Jumlah mobil minimal 1.',
+                    'numeric' => 'Jumlah mobil harus berisi angka.'
                 ]
             ],
             'rental-price-per-day' => [
@@ -165,9 +165,9 @@ class Car extends BaseController
             'image' => [
                 'rules' => 'max_size[image,1024]|is_image[image]|mime_in[image,image/jpg,image,image/jpeg,image/png]',
                 'errors' => [
-                    'max_size' => 'Ukuran gambar terlalu besar',
-                    'is_image' => 'Yang Anda pilih bukan gambar',
-                    'mime_in' => 'Ekstensi file tidak diizinkan'
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'Yang Anda pilih bukan gambar.',
+                    'mime_in' => 'Yang Anda pilih bukan gambar.'
                 ]
             ]
         ])) {

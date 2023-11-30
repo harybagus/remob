@@ -46,9 +46,9 @@ class RenterAccount extends BaseController
             'image' => [
                 'rules' => 'max_size[image,1024]|is_image[image]|mime_in[image,image/jpg,image,image/jpeg,image/png]',
                 'errors' => [
-                    'max_size' => 'Ukuran gambar terlalu besar',
-                    'is_image' => 'Yang Anda pilih bukan gambar',
-                    'mime_in' => 'Ekstensi file tidak diizinkan'
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'Yang Anda pilih bukan gambar.',
+                    'mime_in' => 'Yang Anda pilih bukan gambar.'
                 ]
             ]
         ])) {
