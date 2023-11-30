@@ -61,9 +61,15 @@
                         <div class="card-header">
                             <h6 class="float-left pt-2"><?= $car['name']; ?></h6>
                             <div class="float-right">
-                                <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info">
-                                    Sewa
-                                </a>
+                                <?php if ($car['number_of_cars'] >= 1) : ?>
+                                    <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info">
+                                        Sewa
+                                    </a>
+                                <?php else : ?>
+                                    <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info" data-toggle="modal" data-target="#notAvailableModal">
+                                        Sewa
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-md">
@@ -80,9 +86,9 @@
                                 </tbody>
                                 <tbody>
                                     <tr>
-                                        <td>Nomor polisi</td>
+                                        <td>Transmisi</td>
                                         <td>:</td>
-                                        <th><?= $car['license_plate']; ?></th>
+                                        <th><?= $car['transmission']; ?></th>
                                     </tr>
                                 </tbody>
                                 <tbody>
@@ -94,9 +100,13 @@
                                 </tbody>
                                 <tbody>
                                     <tr>
-                                        <td>Tahun produksi</td>
+                                        <td>Status</td>
                                         <td>:</td>
-                                        <th><?= $car['production_year']; ?></th>
+                                        <?php if ($car['number_of_cars'] >= 1) : ?>
+                                            <th>Tersedia</th>
+                                        <?php else : ?>
+                                            <th>Tidak tersedia</th>
+                                        <?php endif; ?>
                                     </tr>
                                 </tbody>
                                 <tbody>
@@ -118,4 +128,18 @@
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Logout Modal-->
+<div class="modal fade" id="notAvailableModal" tabindex="-1" role="dialog" aria-labelledby="notAvailableModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="notAvailableModalLabel">Mobil tidak tersedia!</h5>
+                <button class="close text-danger" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <?= $this->endSection(); ?>
