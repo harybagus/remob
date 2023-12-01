@@ -61,13 +61,16 @@ class Filters extends BaseConfig
             'admin' => [
                 'except' => [
                     'admin',
-                    'admin/*'
+                    'admin/*',
+                    'admin/*/*',
+                    'admin/*/*/*'
                 ]
             ],
             'renter' => [
                 'except' => [
                     'renter',
-                    'renter/*'
+                    'renter/*',
+                    'renter/*/*'
                 ]
             ]
         ],

@@ -18,7 +18,7 @@ class AdminFilter implements FilterInterface
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        if (session()->get('role_id') == 1) {
+        if (session()->get('role') == 'admin') {
             return redirect()->to(base_url('admin'));
         }
     }

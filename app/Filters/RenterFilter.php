@@ -18,7 +18,7 @@ class RenterFilter implements FilterInterface
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        if (session()->get('role_id') == 2) {
+        if (session()->get('role') == 'renter') {
             return redirect()->to(base_url('renter'));
         }
     }
