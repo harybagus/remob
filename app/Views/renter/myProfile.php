@@ -131,7 +131,7 @@
                                 <label for="confirm-password">Confirm password</label>
                                 <input type="password" class="form-control" id="confirm-password" name="confirm-password">
                             </div>
-                            <button type="submit" class="btn btn-info">Ubah password</button>
+                            <button type="submit" class="btn btn-info">Ubah</button>
                             <button type="reset" class="btn btn-secondary">Batal</button>
                         </form>
                     </div>

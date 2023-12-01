@@ -111,7 +111,7 @@
                     <input type="password" class="form-control" id="confirm-password" name="confirm-password">
                 </div>
             </div>
-            <button type="submit" class="btn btn-info">Ubah password</button>
+            <button type="submit" class="btn btn-info">Ubah</button>
         </form>
 
     </div>

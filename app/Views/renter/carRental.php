@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="mb-4">
-                <button type="submit" class="btn btn-info">Tambah data</button>
+                <button type="submit" class="btn btn-info">Sewa</button>
                 <a href="/renter/car" class="btn btn-secondary">Batal</a>
             </div>
         </form>

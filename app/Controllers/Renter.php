@@ -235,7 +235,26 @@ class Renter extends BaseController
             'status' => 0
         ]);
 
+        $car = $this->carModel->getCarById($this->request->getVar('car-id'));
+        $numberOfCars = $car['number_of_cars'] - 1;
+
+        $this->carModel->save([
+            'id' => $this->request->getVar('car-id'),
+            'number_of_cars' => $numberOfCars
+        ]);
+
         session()->setFlashdata('successMessage', 'Selamat, Anda berhasil menyewa mobil');
         return redirect()->to(base_url('renter/car'));
+    }
+
+    public function rentalData()
+    {
+        $data = [
+            'title' => 'Data Penyewaan',
+            'account' => $this->renterAccountModel->getAccount(session()->get('email')),
+            'rental' => $this->rentalModel->getRentalData()
+        ];
+
+        return view('renter/rentalData', $data);
     }
 }
