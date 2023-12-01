@@ -25,13 +25,9 @@
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/admin/account">
-                        <i class="fas fa-users-cog fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Kelola Akun
-                    </a>
-                    <a class="dropdown-item" href="/admin/change-password">
-                        <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Ubah Password
+                    <a class="dropdown-item" href="/renter">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profil Saya
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/auth/logout" data-toggle="modal" data-target="#logoutModal">
@@ -54,6 +50,15 @@
 
         <div class="dropdown-divider mb-3"></div>
 
+        <?php if (session()->getFlashdata('successMessage')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('successMessage'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <div class="row row-cols-1 row-cols-md-3">
             <?php foreach ($car as $car) : ?>
                 <div class="col mb-4">
@@ -62,17 +67,17 @@
                             <h6 class="float-left pt-2"><?= $car['name']; ?></h6>
                             <div class="float-right">
                                 <?php if ($account['mobile_phone_number'] == "" || $account['ktp_image'] == "" || $account['sim_image'] == "") : ?>
-                                    <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info" data-toggle="modal" data-target="#dataIsIncompleteModal">
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#dataIsIncompleteModal">
                                         Sewa
-                                    </a>
+                                    </button>
                                 <?php elseif ($car['number_of_cars'] >= 1) : ?>
-                                    <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info">
+                                    <a href="/renter/car-rental/<?= $car['id']; ?>" class="btn btn-info">
                                         Sewa
                                     </a>
                                 <?php else : ?>
-                                    <a href="/renter/rental-car/<?= $car['id']; ?>" class="btn btn-info" data-toggle="modal" data-target="#notAvailableModal">
+                                    <button class="btn btn-info" data-toggle="modal" data-target="#notAvailableModal">
                                         Sewa
-                                    </a>
+                                    </button>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -133,7 +138,7 @@
 </div>
 <!-- End of Main Content -->
 
-<!-- Logout Modal-->
+<!-- Data Is Incomplete Modal-->
 <div class="modal fade" id="dataIsIncompleteModal" tabindex="-1" role="dialog" aria-labelledby="dataIsIncompleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

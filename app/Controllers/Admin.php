@@ -96,7 +96,7 @@ class Admin extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to(base_url('admin/change-password'));
+            return redirect()->to(base_url('admin/change-password'))->withInput();
         }
 
         $account = $this->adminAccountModel->getAccount(session()->get('email'));
