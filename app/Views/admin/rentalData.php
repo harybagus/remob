@@ -82,15 +82,27 @@
                         <td><?= $renter['name']; ?></td>
                         <td><?= $car['name']; ?></td>
                         <td><?= formatRupiah($rental['rental_price_per_day']); ?></td>
-                        <td><?= formatRupiah($rental['total_rental_price']); ?></td>
-                        <td><?= date('d F Y', strtotime($rental['rental_start'])); ?></td>
-                        <td><?= date('d F Y', strtotime($rental['rental_end'])); ?></td>
-                        <?php if ($rental['status'] == 0) : ?>
-                            <td>Belum kembali</td>
+                        <?php if ($rental['total_rental_price'] == 0) : ?>
+                            <td><?= 'Rp---.---' ?></td>
                         <?php else : ?>
-                            <td>Sudah kembali</td>
+                            <td><?= formatRupiah($rental['total_rental_price']); ?></td>
                         <?php endif; ?>
-                        <td><a href="/admin/return/<?= $rental['id']; ?>" class="btn btn-dark">Pengembalian</a></td>
+                        <td><?= date('d F Y', strtotime($rental['rental_start'])); ?></td>
+                        <?php if ($rental['rental_end'] == '0000-00-00') : ?>
+                            <td><?= '-- -- --'; ?></td>
+                        <?php else : ?>
+                            <td><?= date('d F Y', strtotime($rental['rental_end'])); ?></td>
+                        <?php endif; ?>
+                        <?php if ($rental['status'] == 0) : ?>
+                            <td>Belum dikembalikan</td>
+                            <td><a href="/admin/return/<?= $rental['id']; ?>" class="btn btn-dark">Pengembalian</a></td>
+                        <?php elseif ($rental['status'] == 1) : ?>
+                            <td>Sudah dikembalikan</td>
+                            <td><button class="btn btn-dark" data-toggle="modal" data-target="#hasBeenReturnedModal">Pengembalian</button></td>
+                        <?php else : ?>
+                            <td>Sudah dibayar</td>
+                            <td><button class="btn btn-dark" data-toggle="modal" data-target="#hasBeenReturnedModal">Pengembalian</button></td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -101,4 +113,18 @@
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Has Been Returned Modal-->
+<div class="modal fade" id="hasBeenReturnedModal" tabindex="-1" role="dialog" aria-labelledby="hasBeenReturnedModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hasBeenReturnedModalLabel">Mobil sudah dikembalikan!</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <?= $this->endSection(); ?>

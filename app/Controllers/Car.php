@@ -4,16 +4,19 @@ namespace App\Controllers;
 
 use App\Models\AdminAccountModel;
 use App\Models\CarModel;
+use App\Models\RentalModel;
 
 class Car extends BaseController
 {
     protected $adminAccountModel;
     protected $carModel;
+    protected $rentalModel;
 
     public function __construct()
     {
         $this->adminAccountModel = new AdminAccountModel();
         $this->carModel = new CarModel();
+        $this->rentalModel = new RentalModel();
     }
 
     public function index()
@@ -212,5 +215,42 @@ class Car extends BaseController
 
         session()->setFlashdata('successMessage', 'Data berhasil dihapus');
         return redirect()->to(base_url('admin/car'));
+    }
+
+    public function rental($id)
+    {
+        if (!$this->validate([
+            'rental-start' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tanggal awal sewa harus diisi.'
+                ]
+            ]
+        ])) {
+            return redirect()->to(base_url('renter/car-rental/' . $id))->withInput();
+        }
+
+        $rentalPricePerDay = $this->request->getVar('rental-price-per-day');
+        $rentalPricePerDay = str_replace('Rp', '', $rentalPricePerDay);
+        $rentalPricePerDay = str_replace('.', '', $rentalPricePerDay);
+
+        $this->rentalModel->save([
+            'renter_id' => $this->request->getVar('renter-id'),
+            'car_id' => $this->request->getVar('car-id'),
+            'rental_price_per_day' => $rentalPricePerDay,
+            'rental_start' => $this->request->getVar('rental-start'),
+            'status' => 0
+        ]);
+
+        $car = $this->carModel->getCarById($this->request->getVar('car-id'));
+        $numberOfCars = $car['number_of_cars'] - 1;
+
+        $this->carModel->save([
+            'id' => $this->request->getVar('car-id'),
+            'number_of_cars' => $numberOfCars
+        ]);
+
+        session()->setFlashdata('successMessage', 'Selamat, Anda berhasil menyewa mobil, silakan ambil mobil di garasi kami!');
+        return redirect()->to(base_url('renter/car'));
     }
 }

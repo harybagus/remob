@@ -187,66 +187,6 @@ class Renter extends BaseController
         return view('renter/carRental', $data);
     }
 
-    public function rental($id)
-    {
-        if (!$this->validate([
-            'rental-start' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Tanggal awal sewa harus diisi.'
-                ]
-            ],
-            'rental-end' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Tanggal akhir sewa harus diisi.'
-                ]
-            ]
-        ])) {
-            return redirect()->to(base_url('renter/car-rental/' . $id))->withInput();
-        }
-
-        $rentalStart = $this->request->getVar('rental-start');
-        $rentalEnd = $this->request->getVar('rental-end');
-
-        if (strtotime($rentalStart) > strtotime($rentalEnd)) {
-            session()->setFlashdata('errorMessage', 'Tanggal akhir sewa tidak boleh kurang dari tanggal awal sewa.');
-            return redirect()->to(base_url('renter/car-rental/' . $id));
-        }
-
-        $rentalStart = date_create($rentalStart);
-        $rentalEnd = date_create($rentalEnd);
-        $interval = date_diff($rentalStart, $rentalEnd);
-        $day = $interval->format('%a') + 1;
-
-        $rentalPricePerDay = $this->request->getVar('rental-price-per-day');
-        $rentalPricePerDay = str_replace('Rp', '', $rentalPricePerDay);
-        $rentalPricePerDay = str_replace('.', '', $rentalPricePerDay);
-
-        $totalRentalPrice = intval($rentalPricePerDay) * $day;
-
-        $this->rentalModel->save([
-            'renter_id' => $this->request->getVar('renter-id'),
-            'car_id' => $this->request->getVar('car-id'),
-            'rental_price_per_day' => $rentalPricePerDay,
-            'total_rental_price' => $totalRentalPrice,
-            'rental_start' => $this->request->getVar('rental-start'),
-            'rental_end' => $this->request->getVar('rental-end'),
-            'status' => 0
-        ]);
-
-        $car = $this->carModel->getCarById($this->request->getVar('car-id'));
-        $numberOfCars = $car['number_of_cars'] - 1;
-
-        $this->carModel->save([
-            'id' => $this->request->getVar('car-id'),
-            'number_of_cars' => $numberOfCars
-        ]);
-
-        session()->setFlashdata('successMessage', 'Selamat, Anda berhasil menyewa mobil');
-        return redirect()->to(base_url('renter/car'));
-    }
-
     public function rentalData()
     {
         $data = [

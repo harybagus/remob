@@ -155,7 +155,7 @@
     </div>
 </div>
 
-<!-- Logout Modal-->
+<!-- Not Available Modal-->
 <div class="modal fade" id="notAvailableModal" tabindex="-1" role="dialog" aria-labelledby="notAvailableModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

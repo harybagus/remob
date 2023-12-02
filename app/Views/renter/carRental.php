@@ -108,12 +108,6 @@
                     <input type="date" min="<?= date('Y-m-d'); ?>" class="form-control" id="rental-start" name="rental-start" value="<?= old('rental-start'); ?>">
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="rental-end" class="col-sm-2 col-form-label">Akhir sewa</label>
-                <div class="col-sm-5">
-                    <input type="date" min="<?= date('Y-m-d'); ?>" class="form-control" id="rental-end" name="rental-end" value="<?= old('rental-end'); ?>">
-                </div>
-            </div>
             <div class="mb-4">
                 <button type="submit" class="btn btn-info">Sewa</button>
                 <a href="/renter/car" class="btn btn-secondary">Batal</a>

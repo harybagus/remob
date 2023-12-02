@@ -42,5 +42,5 @@ $routes->post('/renter/save/(:num)', 'Renter::save/$1');
 $routes->post('/renter/change-password', 'Renter::changePassword');
 $routes->get('/renter/car', 'Renter::carData');
 $routes->get('/renter/car-rental/(:num)', 'Renter::carRental/$1');
-$routes->post('/renter/rental/(:num)', 'Renter::rental/$1');
+$routes->post('/renter/rental/(:num)', 'Car::rental/$1');
 $routes->get('/renter/rental-data', 'Renter::rentalData');
