@@ -197,4 +197,36 @@ class Renter extends BaseController
 
         return view('renter/rentalData', $data);
     }
+
+    public function addBalance($id)
+    {
+        if (!$this->validate([
+            'add-balance' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tambah saldo harus diisi.'
+                ]
+            ]
+        ])) {
+            return redirect()->to(base_url('renter'))->withInput();
+        }
+
+        $currentBalance = $this->request->getVar('current-balance');
+        $currentBalance = str_replace('Rp', '', $currentBalance);
+        $currentBalance = str_replace('.', '', $currentBalance);
+
+        $addBalance = $this->request->getVar('add-balance');
+        $addBalance = str_replace('Rp', '', $addBalance);
+        $addBalance = str_replace('.', '', $addBalance);
+
+        $balance = $currentBalance + $addBalance;
+
+        $this->renterAccountModel->save([
+            'id' => $id,
+            'balance' => $balance
+        ]);
+
+        session()->setFlashdata('successMessage', 'Saldo berhasil ditambahkan');
+        return redirect()->to(base_url('renter'));
+    }
 }

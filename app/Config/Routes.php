@@ -46,3 +46,4 @@ $routes->get('/renter/car', 'Renter::carData');
 $routes->get('/renter/car-rental/(:num)', 'Renter::carRental/$1');
 $routes->post('/renter/rental/(:num)', 'Car::rental/$1');
 $routes->get('/renter/rental-data', 'Renter::rentalData');
+$routes->post('/renter/add-balance/(:num)', 'Renter::addBalance/$1');

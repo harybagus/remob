@@ -9,6 +9,33 @@
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
+        <!-- Nav Item - Wallet -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="walletDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-wallet fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header border-info bg-info">
+                    Dompet Saya
+                </h6>
+                <div class="m-4">
+                    <form action="/renter/add-balance/<?= $account['id']; ?>" method="post" autocomplete="off">
+                        <?= csrf_field(); ?>
+                        <div class="form-group">
+                            <label for="current-balance">Saldo</label>
+                            <input type="text" class="form-control" id="current-balance" name="current-balance" value="<?= formatRupiah($account['balance']); ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-balance">Tambah saldo</label>
+                            <input type="text" class="form-control" id="add-balance" name="add-balance" onkeyup="this.value = formatRupiah(this.value, 'Rp')">
+                        </div>
+                        <button type="submit" class="btn btn-info">Tambah</button>
+                    </form>
+                </div>
+            </div>
+        </li>
+
         <div class="topbar-divider d-none d-sm-block"></div>
 
         <!-- Nav Item - User Information -->
