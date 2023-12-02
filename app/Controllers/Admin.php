@@ -5,18 +5,21 @@ namespace App\Controllers;
 use App\Models\AdminAccountModel;
 use App\Models\RenterAccountModel;
 use App\Models\CarModel;
+use App\Models\RentalModel;
 
 class Admin extends BaseController
 {
     protected $adminAccountModel;
     protected $renterAccountModel;
     protected $carModel;
+    protected $rentalModel;
 
     public function __construct()
     {
         $this->adminAccountModel = new AdminAccountModel();
         $this->renterAccountModel = new RenterAccountModel();
         $this->carModel = new CarModel();
+        $this->rentalModel = new RentalModel();
     }
 
     public function index()
@@ -60,6 +63,17 @@ class Admin extends BaseController
         ];
 
         return view('admin/carData', $data);
+    }
+
+    public function rentalData()
+    {
+        $data = [
+            'title' => 'Data Penyewaan',
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
+            'rental' => $this->rentalModel->getRentalData()
+        ];
+
+        return view('admin/rentalData', $data);
     }
 
     public function changePassword()
