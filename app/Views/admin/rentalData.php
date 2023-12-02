@@ -52,6 +52,15 @@
         <!-- Page Heading -->
         <h3 class="mb-4 text-gray-800"><?= $title; ?></h3>
 
+        <?php if (session()->getFlashdata('successMessage')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('successMessage'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <table class="table table-hover text-center">
             <thead class="thead-dark">
                 <tr>
@@ -95,7 +104,7 @@
                         <?php endif; ?>
                         <?php if ($rental['status'] == 0) : ?>
                             <td>Belum dikembalikan</td>
-                            <td><a href="/admin/return/<?= $rental['id']; ?>" class="btn btn-dark">Pengembalian</a></td>
+                            <td><a href="/admin/car-return/<?= $rental['id']; ?>" class="btn btn-dark">Pengembalian</a></td>
                         <?php elseif ($rental['status'] == 1) : ?>
                             <td>Sudah dikembalikan</td>
                             <td><button class="btn btn-dark" data-toggle="modal" data-target="#hasBeenReturnedModal">Pengembalian</button></td>

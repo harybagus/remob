@@ -13,4 +13,9 @@ class RentalModel extends Model
     {
         return $this->doFindAll();
     }
+
+    public function getRentalDataById($id)
+    {
+        return $this->where(['id' => $id])->first();
+    }
 }
