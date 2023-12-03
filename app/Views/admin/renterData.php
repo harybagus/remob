@@ -48,9 +48,6 @@
                         <td><?= $renterAccount['email']; ?></td>
                         <td><?= date('d F Y', $renterAccount['date_created']); ?></td>
                         <td>
-                            <a href="/admin/renter/read/<?= $renterAccount['id']; ?>" class="btn btn-success">
-                                <i class="fas fa-user-check"></i>
-                            </a>
                             <a href="/admin/renter/update/<?= $renterAccount['id']; ?>" class="btn btn-warning">
                                 <i class="fas fa-user-edit"></i>
                             </a>

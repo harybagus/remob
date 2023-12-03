@@ -31,7 +31,7 @@
         <?php endif; ?>
 
         <?php if (session()->getFlashdata('errorMessage')) : ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
                 <ul>
                     <li>
