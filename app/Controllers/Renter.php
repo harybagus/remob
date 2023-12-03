@@ -229,4 +229,41 @@ class Renter extends BaseController
         session()->setFlashdata('successMessage', 'Saldo berhasil ditambahkan');
         return redirect()->to(base_url('renter'));
     }
+
+    public function payment($id)
+    {
+        $data = [
+            'title' => 'Pembayaran',
+            'account' => $this->renterAccountModel->getAccount(session()->get('email')),
+            'rental' => $this->rentalModel->getRentalDataById($id)
+        ];
+
+        return view('renter/payment', $data);
+    }
+
+    public function pay($id)
+    {
+        $renter = $this->renterAccountModel->getAccountById($this->request->getVar('renter-id'));
+        $rental = $this->rentalModel->getRentalDataById($id);
+
+        if ($renter['balance'] < $rental['total_rental_price']) {
+            session()->setFlashdata('errorMessage', 'Saldo Anda tidak cukup!');
+            return redirect()->to(base_url('renter/payment/' . $id))->withInput();
+        }
+
+        $balance = $renter['balance'] - $rental['total_rental_price'];
+
+        $this->rentalModel->save([
+            'id' => $id,
+            'status' => 2
+        ]);
+
+        $this->renterAccountModel->save([
+            'id' => $this->request->getVar('renter-id'),
+            'balance' => $balance
+        ]);
+
+        session()->setFlashdata('successMessage', 'Pembayaran berhasil');
+        return redirect()->to(base_url('renter/rental-data'));
+    }
 }

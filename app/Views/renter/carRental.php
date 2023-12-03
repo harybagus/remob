@@ -30,20 +30,6 @@
             </div>
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('errorMessage')) : ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h4>Kesalahan</h4>
-                <ul>
-                    <li>
-                        <?= session()->getFlashdata('errorMessage'); ?>
-                    </li>
-                </ul>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
-
         <form action="/renter/rental/<?= $car['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
             <?= csrf_field(); ?>
             <input type="hidden" name="renter-id" value="<?= $account['id']; ?>">

@@ -12,6 +12,15 @@
         <!-- Page Heading -->
         <h3 class="mb-4 text-gray-800"><?= $title; ?></h3>
 
+        <?php if (session()->getFlashdata('successMessage')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('successMessage'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <table class="table table-hover text-center">
             <thead class="thead-dark">
                 <tr>
@@ -55,7 +64,7 @@
                                 <td><button class="btn btn-dark" data-toggle="modal" data-target="#notBeenReturnedModal">Bayar</button></td>
                             <?php elseif ($rental['status'] == 1) : ?>
                                 <td>Sudah dikembalikan</td>
-                                <td><a href="/renter/pay/<?= $rental['id']; ?>" class="btn btn-dark">Bayar</a></td>
+                                <td><a href="/renter/payment/<?= $rental['id']; ?>" class="btn btn-dark">Bayar</a></td>
                             <?php else : ?>
                                 <td>Sudah dibayar</td>
                                 <td><button class="btn btn-dark" data-toggle="modal" data-target="#alreadyPaidModal">Bayar</button></td>
