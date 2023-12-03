@@ -29,10 +29,11 @@
         <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/renter">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/auth">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-car"></i>
                 </div>
+
                 <div class="sidebar-brand-text mx-3">ReMob</div>
             </a>
 
@@ -128,7 +129,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">Klik "Logout" untuk keluar dari website ini.</div>
+
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                     <a class="btn btn-info" href="/auth/logout">Logout</a>

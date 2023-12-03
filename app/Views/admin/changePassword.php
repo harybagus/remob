@@ -17,6 +17,7 @@
         <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
             <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
+
                 <ul>
                     <?php foreach (session()->getFlashdata('_ci_validation_errors') as $error) : ?>
                         <li>
@@ -24,6 +25,7 @@
                         </li>
                     <?php endforeach; ?>
                 </ul>
+
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -33,6 +35,7 @@
         <?php if (session()->getFlashdata('successMessage')) : ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= session()->getFlashdata('successMessage'); ?>
+
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -40,11 +43,13 @@
         <?php elseif (session()->getFlashdata('errorMessage')) : ?>
             <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
+
                 <ul>
                     <li>
                         <?= session()->getFlashdata('errorMessage'); ?>
                     </li>
                 </ul>
+
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -53,24 +58,28 @@
 
         <form action="/admin/change" method="post" autocomplete="off">
             <?= csrf_field(); ?>
+
             <div class="row mb-3">
                 <label for="current-password" class="col-sm-2 col-form-label">Password saat ini</label>
                 <div class="col-sm-5">
                     <input type="password" class="form-control" id="current-password" name="current-password">
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="new-password" class="col-sm-2 col-form-label">Password baru</label>
                 <div class="col-sm-5">
                     <input type="password" class="form-control" id="new-password" name="new-password">
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="confirm-password" class="col-sm-2 col-form-label">Confirm password</label>
                 <div class="col-sm-5">
                     <input type="password" class="form-control" id="confirm-password" name="confirm-password">
                 </div>
             </div>
+
             <button type="submit" class="btn btn-info">Ubah</button>
         </form>
 

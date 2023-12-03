@@ -14,20 +14,21 @@
 
         <div class="dropdown-divider mb-3"></div>
 
-        <?php if (session()->getFlashdata('successMessage')) : ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('successMessage'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
-
         <!-- Button trigger modal -->
         <a href="/admin/car/create" class="btn btn-info mb-3">
             <i class="fas fa-car"></i>
             Tambah data mobil
         </a>
+
+        <?php if (session()->getFlashdata('successMessage')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('successMessage'); ?>
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
 
         <div class="row row-cols-1 row-cols-md-3">
             <?php foreach ($car as $car) : ?>
@@ -39,14 +40,17 @@
                                 <a href="/admin/car/update/<?= $car['id']; ?>" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
+
                                 <a href="/admin/car/delete/<?= $car['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data mobil?')">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>
                         </div>
+
                         <div class="col-md">
                             <img src="/assets/img/car/<?= $car['image']; ?>" alt="<?= $car['name']; ?>" class="img-thumbnail mt-3 mb-2">
                         </div>
+
                         <div class="col-md">
                             <table class="table table-sm table-borderless">
                                 <tbody>
@@ -56,6 +60,7 @@
                                         <th><?= $car['merk']; ?></th>
                                     </tr>
                                 </tbody>
+
                                 <tbody>
                                     <tr>
                                         <td>Transmisi</td>
@@ -63,6 +68,7 @@
                                         <th><?= $car['transmission']; ?></th>
                                     </tr>
                                 </tbody>
+
                                 <tbody>
                                     <tr>
                                         <td>Jumlah kursi</td>
@@ -70,6 +76,7 @@
                                         <th><?= $car['seat']; ?></th>
                                     </tr>
                                 </tbody>
+
                                 <tbody>
                                     <tr>
                                         <td>Jumlah mobil</td>
@@ -77,6 +84,7 @@
                                         <th><?= $car['number_of_cars']; ?></th>
                                     </tr>
                                 </tbody>
+
                                 <tbody>
                                     <tr>
                                         <td>Harga sewa / hari</td>

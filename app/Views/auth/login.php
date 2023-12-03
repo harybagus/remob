@@ -22,6 +22,7 @@
                                 <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         <h4>Kesalahan</h4>
+
                                         <ul>
                                             <?php foreach (session()->getFlashdata('_ci_validation_errors') as $error) : ?>
                                                 <li>
@@ -29,6 +30,7 @@
                                                 </li>
                                             <?php endforeach; ?>
                                         </ul>
+
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -38,6 +40,7 @@
                                 <?php if (session()->getFlashdata('successMessage')) : ?>
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                                         <?= session()->getFlashdata('successMessage'); ?>
+
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -45,11 +48,13 @@
                                 <?php elseif (session()->getFlashdata('errorMessage')) : ?>
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         <h4>Kesalahan</h4>
+
                                         <ul>
                                             <li>
                                                 <?= session()->getFlashdata('errorMessage'); ?>
                                             </li>
                                         </ul>
+
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>

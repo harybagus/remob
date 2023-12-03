@@ -27,6 +27,7 @@
                                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Data Mobil</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $car; ?> Mobil</div>
                                 </div>
+
                                 <div class="col-auto">
                                     <i class="fas fa-car fa-2x text-gray-300"></i>
                                 </div>
@@ -46,6 +47,7 @@
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Data Penyewa</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $renterAccount; ?> Penyewa</div>
                                 </div>
+
                                 <div class="col-auto">
                                     <i class="fas fa-users fa-2x text-gray-300"></i>
                                 </div>
@@ -65,6 +67,7 @@
                                     <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Data Penyewaan</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $rental; ?> Penyewaan</div>
                                 </div>
+
                                 <div class="col-auto">
                                     <i class="fas fa-receipt fa-2x text-gray-300"></i>
                                 </div>
@@ -84,6 +87,7 @@
                                     <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Data Admin</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $adminAccount; ?> Admin</div>
                                 </div>
+
                                 <div class="col-auto">
                                     <i class="fas fa-users fa-2x text-gray-300"></i>
                                 </div>

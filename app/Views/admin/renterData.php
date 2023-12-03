@@ -14,20 +14,21 @@
 
         <div class="dropdown-divider mb-3"></div>
 
-        <?php if (session()->getFlashdata('successMessage')) : ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('successMessage'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
-
         <!-- Button trigger modal -->
         <a href="/admin/renter/create" class="btn btn-info mb-3">
             <i class="fas fa-user-plus"></i>
             Tambah data penyewa
         </a>
+
+        <?php if (session()->getFlashdata('successMessage')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('successMessage'); ?>
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
 
         <table class="table table-striped table-hover">
             <thead>
@@ -39,6 +40,7 @@
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
+
             <tbody>
                 <?php $i = 1; ?>
                 <?php foreach ($renterAccount as $renterAccount) : ?>
@@ -51,6 +53,7 @@
                             <a href="/admin/renter/update/<?= $renterAccount['id']; ?>" class="btn btn-warning">
                                 <i class="fas fa-user-edit"></i>
                             </a>
+
                             <a href="/admin/renter/delete/<?= $renterAccount['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data penyewa?')">
                                 <i class="fas fa-user-minus"></i>
                             </a>

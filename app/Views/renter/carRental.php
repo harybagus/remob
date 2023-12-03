@@ -17,6 +17,7 @@
         <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
             <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
+
                 <ul>
                     <?php foreach (session()->getFlashdata('_ci_validation_errors') as $error) : ?>
                         <li>
@@ -24,6 +25,7 @@
                         </li>
                     <?php endforeach; ?>
                 </ul>
+
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -32,32 +34,38 @@
 
         <form action="/renter/rental/<?= $car['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
             <?= csrf_field(); ?>
+
             <input type="hidden" name="renter-id" value="<?= $account['id']; ?>">
             <input type="hidden" name="car-id" value="<?= $car['id']; ?>">
+
             <div class="row mb-3">
                 <label for="name" class="col-sm-2 col-form-label">Nama lengkap</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="name" name="name" value="<?= $account['name']; ?>" readonly>
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="car-name" class="col-sm-2 col-form-label">Nama mobil</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="car-name" name="car-name" value="<?= $car['name']; ?>" readonly>
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="rental-price-per-day" class="col-sm-2 col-form-label">Harga sewa / hari</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="rental-price-per-day" name="rental-price-per-day" value="<?= formatRupiah($car['rental_price_per_day']); ?>" readonly>
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="rental-start" class="col-sm-2 col-form-label">Awal sewa</label>
                 <div class="col-sm-5">
                     <input type="date" min="<?= date('Y-m-d'); ?>" class="form-control" id="rental-start" name="rental-start" value="<?= old('rental-start'); ?>">
                 </div>
             </div>
+
             <div class="mb-4">
                 <button type="submit" class="btn btn-info">Sewa</button>
                 <a href="/renter/car" class="btn btn-secondary">Batal</a>

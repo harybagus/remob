@@ -58,7 +58,7 @@ class Renter extends BaseController
             'sim-image' => [
                 'rules' => 'uploaded[sim-image]|max_size[image,1024]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]',
                 'errors' => [
-                    'uploaded' => 'Anda belum meng-upload foto SIM.',
+                    'uploaded' => 'Anda belum meng-upload foto SIM A.',
                     'max_size' => 'Ukuran gambar terlalu besar.',
                     'is_image' => 'Yang Anda pilih bukan gambar.',
                     'mime_in' => 'Yang Anda pilih bukan gambar.'

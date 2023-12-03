@@ -15,14 +15,15 @@
         <?php if (session()->getFlashdata('successMessage')) : ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= session()->getFlashdata('successMessage'); ?>
+
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         <?php endif; ?>
 
-        <table class="table table-hover text-center">
-            <thead class="thead-dark">
+        <table class="table table-striped table-hover">
+            <thead class="">
                 <tr>
                     <th scope="col">No.</th>
                     <th scope="col">Nama Penyewa</th>
@@ -35,6 +36,7 @@
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
+
             <tbody>
                 <?php $i = 1; ?>
                 <?php foreach ($rental as $rental) : ?>
@@ -51,26 +53,30 @@
                         <td><?= $renter['name']; ?></td>
                         <td><?= $car['name']; ?></td>
                         <td><?= formatRupiah($rental['rental_price_per_day']); ?></td>
+
                         <?php if ($rental['total_rental_price'] == 0) : ?>
                             <td><?= 'Rp---.---' ?></td>
                         <?php else : ?>
                             <td><?= formatRupiah($rental['total_rental_price']); ?></td>
                         <?php endif; ?>
+
                         <td><?= date('d F Y', strtotime($rental['rental_start'])); ?></td>
+
                         <?php if ($rental['rental_end'] == '0000-00-00') : ?>
                             <td><?= '-- -- --'; ?></td>
                         <?php else : ?>
                             <td><?= date('d F Y', strtotime($rental['rental_end'])); ?></td>
                         <?php endif; ?>
+
                         <?php if ($rental['status'] == 0) : ?>
                             <td>Belum dikembalikan</td>
-                            <td><a href="/admin/car-return/<?= $rental['id']; ?>" class="btn btn-dark">Pengembalian</a></td>
+                            <td><a href="/admin/car-return/<?= $rental['id']; ?>" class="btn btn-info">Pengembalian</a></td>
                         <?php elseif ($rental['status'] == 1) : ?>
                             <td>Sudah dikembalikan</td>
-                            <td><button class="btn btn-dark" data-toggle="modal" data-target="#hasBeenReturnedModal">Pengembalian</button></td>
+                            <td><button class="btn btn-info" data-toggle="modal" data-target="#hasBeenReturnedModal">Pengembalian</button></td>
                         <?php else : ?>
                             <td>Sudah dibayar</td>
-                            <td><button class="btn btn-dark" data-toggle="modal" data-target="#hasBeenReturnedModal">Pengembalian</button></td>
+                            <td><button class="btn btn-info" data-toggle="modal" data-target="#hasBeenReturnedModal">Pengembalian</button></td>
                         <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
@@ -89,6 +95,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="hasBeenReturnedModalLabel">Mobil sudah dikembalikan!</h5>
+
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

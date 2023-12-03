@@ -17,6 +17,7 @@
         <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
             <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
+
                 <ul>
                     <?php foreach (session()->getFlashdata('_ci_validation_errors') as $error) : ?>
                         <li>
@@ -24,6 +25,7 @@
                         </li>
                     <?php endforeach; ?>
                 </ul>
+
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -32,18 +34,21 @@
 
         <form action="/admin/car/add" method="post" enctype="multipart/form-data" autocomplete="off">
             <?= csrf_field(); ?>
+
             <div class="row mb-3">
                 <label for="name" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="name" name="name" value="<?= old('name'); ?>">
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="merk" class="col-sm-2 col-form-label">Merk</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="merk" name="merk" value="<?= old('merk'); ?>">
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="transmission" class="col-sm-2 col-form-label">Transmisi</label>
                 <div class="col-sm-5">
@@ -54,29 +59,34 @@
                     </select>
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="seat" class="col-sm-2 col-form-label">Jumlah kursi</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="seat" name="seat" value="<?= old('seat'); ?>">
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="number-of-cars" class="col-sm-2 col-form-label">Jumlah mobil</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="number-of-cars" name="number-of-cars" value="<?= old('number-of-cars'); ?>">
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="rental-price-per-day" class="col-sm-2 col-form-label">Harga sewa / hari</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control" id="rental-price-per-day" name="rental-price-per-day" value="<?= old('rental-price-per-day'); ?>" onkeyup="this.value = formatRupiah(this.value, 'Rp')">
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="image" class="col-sm-2 col-form-label" id="img-label">Gambar</label>
                 <div class="col-sm-2 d-none" id="col-img-preview">
                     <img src="/assets/img/car/HondaBrioSatya.png" alt="Default image" class="img-thumbnail img-preview">
                 </div>
+
                 <div class="col-sm-5">
                     <div class="custom-file">
                         <input type="file" accept="image/*" class="custom-file-input" id="image" name="image" aria-describedby="inputGroupFileAddon01">
@@ -84,6 +94,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="mb-4">
                 <button type="submit" class="btn btn-info">Tambah data</button>
                 <a href="/admin/car" class="btn btn-secondary">Batal</a>
