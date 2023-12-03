@@ -18,4 +18,9 @@ class RentalModel extends Model
     {
         return $this->where(['id' => $id])->first();
     }
+
+    public function getNumberOfRentals()
+    {
+        return $this->table('rental')->countAllResults();
+    }
 }

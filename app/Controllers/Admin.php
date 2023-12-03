@@ -26,10 +26,14 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Dashboard',
-            'account' => $this->adminAccountModel->getAccount(session()->get('email'))
+            'account' => $this->adminAccountModel->getAccount(session()->get('email')),
+            'car' => $this->carModel->getNumberOfCars(),
+            'renterAccount' => $this->renterAccountModel->getNumberOfRenters(),
+            'rental' => $this->rentalModel->getNumberOfRentals(),
+            'adminAccount' => $this->adminAccountModel->getNumberOfAdmins(),
         ];
 
-        return view('admin/index', $data);
+        return view('admin/dashboard', $data);
     }
 
     public function account()

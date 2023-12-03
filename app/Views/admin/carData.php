@@ -39,7 +39,7 @@
                                 <a href="/admin/car/update/<?= $car['id']; ?>" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="/admin/car/delete/<?= $car['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data admin?')">
+                                <a href="/admin/car/delete/<?= $car['id']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data mobil?')">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>

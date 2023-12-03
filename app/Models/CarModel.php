@@ -18,4 +18,9 @@ class CarModel extends Model
     {
         return $this->where(['id' => $id])->first();
     }
+
+    public function getNumberOfCars()
+    {
+        return $this->table('car')->countAllResults();
+    }
 }

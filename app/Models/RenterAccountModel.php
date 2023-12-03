@@ -23,4 +23,9 @@ class RenterAccountModel extends Model
     {
         return $this->doFindAll();
     }
+
+    public function getNumberOfRenters()
+    {
+        return $this->table('renter')->countAllResults();
+    }
 }

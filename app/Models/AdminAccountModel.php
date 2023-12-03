@@ -23,4 +23,9 @@ class AdminAccountModel extends Model
     {
         return $this->doFindAll();
     }
+
+    public function getNumberOfAdmins()
+    {
+        return $this->table('admin')->countAllResults();
+    }
 }
