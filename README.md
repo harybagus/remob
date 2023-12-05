@@ -16,9 +16,10 @@ Nama anggota kelompok:
 ## Teknologi yang digunakan
 Berikut teknologi yang kami gunakan untuk membuat website ini:
 * HTML
-* SB Admin 2
+* SB Admin 2 (template)
 * Bootstrap 4
 * JavaScript
+* JQuery
 * Codeigniter 4
 * MySQL
 
@@ -61,3 +62,20 @@ password: iyaniyan
 buana@ganteng.com
 password: buana123
 ```
+
+## Fitur
+1. Admin
+* Mengubah profil dan password sendiri
+* Mengelola data admin (CRUD)
+* Mengelola data mobil (CRUD)
+* Mengelola data penyewa (CRUD)
+* Melihat data penyewaan
+* Menginput pengembalian mobil
+
+2. Penyewa
+* Mengubah profil dan password sendiri
+* Top up e-Wallet
+* Melihat data mobil
+* Menyewa mobil
+* Melihat data penyewaan sendiri
+* Membayar penyewaan
