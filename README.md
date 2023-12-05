@@ -28,3 +28,36 @@ Berikut teknologi yang kami gunakan untuk membuat website ini:
 3. Import database remob.sql ke MySQL
 4. Buka git bash lalu ketikkan `php spark serve`
 5. Buka browser favorit Anda lalu ketikkan `localhost:8080/auth`
+
+## Akun
+1. Admin
+```
+adminsatu@remob.co.id
+password: adminsatu
+```
+```
+admindua@remob.co.id
+password: admindua
+```
+
+2. Penyewa
+```
+mas@cahyono.my.id
+password: yonoyono
+```
+```
+bagus@banget.com
+password: bagusbanget
+```
+```
+niasaerox@gmail.com
+password: niasaerox
+```
+```
+iyan@alvian.xyz
+password: iyaniyan
+```
+```
+buana@ganteng.com
+password: buana123
+```
