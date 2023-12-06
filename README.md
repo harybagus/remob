@@ -19,7 +19,6 @@ Berikut teknologi yang kami gunakan untuk membuat website ini:
 * SB Admin 2 (template)
 * Bootstrap 4
 * JavaScript
-* JQuery
 * Codeigniter 4
 * MySQL
 
