@@ -20,7 +20,9 @@
                 <h6 class="dropdown-header border-info bg-info">Dompet Saya</h6>
 
                 <div class="m-4">
+                    <!-- Form untuk menambah saldo e-Wallet -->
                     <form action="/renter/add-balance/<?= $account['id']; ?>" method="post" autocomplete="off">
+                        <!-- Melindungi web dari serangan CSRF(Cross-Site Request Forgery) -->
                         <?= csrf_field(); ?>
 
                         <div class="form-group">

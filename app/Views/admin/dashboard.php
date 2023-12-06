@@ -1,9 +1,12 @@
+<!-- Menggunakan template user -->
 <?= $this->extend('layout/user_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <!-- Main Content -->
 <div id="content">
 
+    <!-- Menggunakan topbar admin -->
     <?= $this->include('layout/topbarAdmin'); ?>
 
     <!-- Begin Page Content -->
@@ -17,7 +20,7 @@
         <!-- Content Row -->
         <div class="row">
 
-            <!-- Car Card -->
+            <!-- Menampilkan jumlah data mobil -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <a href="/admin/car" class="text-decoration-none">
                     <div class="card border-left-info shadow h-100 py-2">
@@ -37,7 +40,7 @@
                 </a>
             </div>
 
-            <!-- Renter Card -->
+            <!-- Menampilkan jumlah data penyewa -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <a href="/admin/renter" class="text-decoration-none">
                     <div class="card border-left-success shadow h-100 py-2">
@@ -57,7 +60,7 @@
                 </a>
             </div>
 
-            <!-- Rental Card -->
+            <!-- Menampilkan jumlah data penyewaan -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <a href="/admin/rental" class="text-decoration-none">
                     <div class="card border-left-warning shadow h-100 py-2">
@@ -77,7 +80,7 @@
                 </a>
             </div>
 
-            <!-- Admin Card -->
+            <!-- Menampilkan jumlah data admin -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <a href="/admin/account" class="text-decoration-none">
                     <div class="card border-left-danger shadow h-100 py-2">

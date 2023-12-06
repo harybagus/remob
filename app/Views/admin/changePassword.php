@@ -1,9 +1,12 @@
+<!-- Menggunakan template user -->
 <?= $this->extend('layout/user_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <!-- Main Content -->
 <div id="content">
 
+    <!-- Menggunakan topbar admin -->
     <?= $this->include('layout/topbarAdmin'); ?>
 
     <!-- Begin Page Content -->
@@ -14,6 +17,7 @@
 
         <div class="dropdown-divider mb-3"></div>
 
+        <!-- Menampilkan error ketika tidak lolos validasi -->
         <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
             <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
@@ -32,6 +36,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Menampilkan pesan berhasil ketika berhasil mengubah password -->
         <?php if (session()->getFlashdata('successMessage')) : ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= session()->getFlashdata('successMessage'); ?>
@@ -40,6 +45,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+            <!-- Menampilkan pesan error ketika tidak lolos validasi -->
         <?php elseif (session()->getFlashdata('errorMessage')) : ?>
             <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
@@ -56,7 +63,9 @@
             </div>
         <?php endif; ?>
 
+        <!-- Form untuk mengubah password admin -->
         <form action="/admin/change" method="post" autocomplete="off">
+            <!-- Melindungi web dari serangan CSRF(Cross-Site Request Forgery) -->
             <?= csrf_field(); ?>
 
             <div class="row mb-3">

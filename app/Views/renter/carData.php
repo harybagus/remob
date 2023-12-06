@@ -1,9 +1,12 @@
+<!-- Menggunakan template user -->
 <?= $this->extend('layout/user_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <!-- Main Content -->
 <div id="content">
 
+    <!-- Menggunakan topbar renter -->
     <?= $this->include('layout/topbarRenter'); ?>
 
     <!-- Begin Page Content -->
@@ -14,6 +17,7 @@
 
         <div class="dropdown-divider mb-3"></div>
 
+        <!-- Menampilkan pesan berhasil ketika menyewa mobil -->
         <?php if (session()->getFlashdata('successMessage')) : ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= session()->getFlashdata('successMessage'); ?>
@@ -24,6 +28,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Menampilkan data mobil -->
         <div class="row row-cols-1 row-cols-md-3">
             <?php foreach ($car as $car) : ?>
                 <div class="col mb-4">

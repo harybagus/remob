@@ -1,5 +1,7 @@
+<!-- Menggunakan template auth -->
 <?= $this->extend('layout/auth_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <div class="container">
 
@@ -19,6 +21,7 @@
                                     <p class="mb-4">Silakan masukkan email dan password Anda</p>
                                 </div>
 
+                                <!-- Menampilkan error ketika tidak lolos validasi -->
                                 <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         <h4>Kesalahan</h4>
@@ -37,6 +40,7 @@
                                     </div>
                                 <?php endif; ?>
 
+                                <!-- Menampilkan pesan berhasil ketika berhasil membuat akun atau logout -->
                                 <?php if (session()->getFlashdata('successMessage')) : ?>
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                                         <?= session()->getFlashdata('successMessage'); ?>
@@ -45,6 +49,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
+
+                                    <!-- Menampilkan pesan error ketika tidak lolos validasi -->
                                 <?php elseif (session()->getFlashdata('errorMessage')) : ?>
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         <h4>Kesalahan</h4>
@@ -61,7 +67,9 @@
                                     </div>
                                 <?php endif; ?>
 
+                                <!-- Form untuk login -->
                                 <form class="user" autocomplete="off" method="post" action="/auth/login">
+                                    <!-- Melindungi web dari serangan CSRF(Cross-Site Request Forgery) -->
                                     <?= csrf_field(); ?>
 
                                     <div class="form-group">

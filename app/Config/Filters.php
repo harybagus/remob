@@ -26,7 +26,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'admin'         => \App\Filters\AdminFilter::class,
-        'renter'          => \App\Filters\RenterFilter::class,
+        'renter'        => \App\Filters\RenterFilter::class,
     ];
 
     /**

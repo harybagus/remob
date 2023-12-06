@@ -1,5 +1,7 @@
+<!-- Menggunakan template auth -->
 <?= $this->extend('layout/auth_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <div class="container">
 
@@ -13,6 +15,7 @@
                             <h1 class="h4 text-gray-900 mb-4">Buat Akun!</h1>
                         </div>
 
+                        <!-- Menampilkan error ketika tidak lolos validasi -->
                         <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <h4>Kesalahan</h4>
@@ -31,7 +34,9 @@
                             </div>
                         <?php endif; ?>
 
+                        <!-- Form untuk registrasi -->
                         <form class="user" autocomplete="off" method="post" action="/auth/create">
+                            <!-- Melindungi web dari serangan CSRF(Cross-Site Request Forgery) -->
                             <?= csrf_field(); ?>
 
                             <div class="form-group">

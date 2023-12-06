@@ -21,6 +21,7 @@
 </head>
 
 <body class="bg-gradient-info">
+    <!-- Memanggil section content -->
     <?= $this->renderSection('content'); ?>
 
     <!-- Bootstrap core JavaScript-->

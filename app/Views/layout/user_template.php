@@ -39,8 +39,13 @@
 
             <!-- Query Menu -->
             <?php
+            // Koneksi ke database.
             $db = db_connect();
+
+            // Membuat query mengambil menu.
             $queryMenu = "SELECT * FROM `menu`";
+
+            // Mengambil menu.
             $menu = $db->query($queryMenu)->getResultArray();
             ?>
 
@@ -53,12 +58,15 @@
                     <?= $menu['menu']; ?>
                 </div>
 
-                <!-- Submenu sesuai menu -->
                 <?php
+                // Membuat query mengambil submenu berdasarkan id menu dan role.
                 $querySubmenu = "SELECT * FROM `sub_menu` WHERE `menu_id` = ? AND `role` = ?";
+
+                // Mengambil submenu
                 $submenu = $db->query($querySubmenu, [$menu['id'], session()->get('role')])->getResultArray();
                 ?>
 
+                <!-- Menampilkan submenu -->
                 <?php foreach ($submenu as $submenu) : ?>
                     <!-- Nav Item - Dashboard -->
                     <?php if ($title == $submenu['title']) : ?>
@@ -96,6 +104,7 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
+            <!-- Memanggil section content -->
             <?= $this->renderSection('content'); ?>
 
             <!-- Footer -->

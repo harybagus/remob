@@ -1,9 +1,12 @@
+<!-- Menggunakan template user -->
 <?= $this->extend('layout/user_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <!-- Main Content -->
 <div id="content">
 
+    <!-- Menggunakan topbar renter -->
     <?= $this->include('layout/topbarRenter'); ?>
 
     <!-- Begin Page Content -->
@@ -14,6 +17,7 @@
 
         <div class="dropdown-divider mb-3"></div>
 
+        <!-- Menampilkan pesan peringatan ketika penyewa belum melengkapi data diri -->
         <?php if ($account['mobile_phone_number'] == "" || $account['ktp_image'] == "" || $account['sim_image'] == "") : ?>
             <div class="alert alert-info alert-dismissible fade show" role="alert">
                 Selamat datang di ReMob, sebelum menyewa mobil Anda harus <strong>melengkapi data diri</strong> terlebih dahulu!
@@ -24,6 +28,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Menampilkan error ketika tidak lolos validasi -->
         <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
@@ -42,6 +47,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Menampilkan pesan berhasil ketika berhasil melengkapi data diri, mengubah password dan menambah saldo e-Wallet -->
         <?php if (session()->getFlashdata('successMessage')) : ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= session()->getFlashdata('successMessage'); ?>
@@ -50,6 +56,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+            <!-- Menampilkan pesan error ketika tidak lolos validasi -->
         <?php elseif (session()->getFlashdata('errorMessage')) : ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
@@ -66,9 +74,9 @@
             </div>
         <?php endif; ?>
 
-        <!-- Card Profile -->
         <div class="d-flex mb-4">
             <div class="float-left w-100">
+                <!-- Card profil -->
                 <div class="card mb-3 mr-3 border-info">
                     <div class="row">
                         <div class="col-md-4">
@@ -85,11 +93,14 @@
                     </div>
                 </div>
 
+                <!-- Card ubah password -->
                 <div class="card mr-3 border-info">
                     <h5 class="card-header">Ubah Password</h5>
 
                     <div class="card-body">
+                        <!-- Form untuk mengubah password -->
                         <form action="/renter/change-password" method="post" autocomplete="off">
+                            <!-- Melindungi web dari serangan CSRF(Cross-Site Request Forgery) -->
                             <?= csrf_field(); ?>
 
                             <div class="form-group">
@@ -115,6 +126,7 @@
             </div>
 
             <div class="float-right w-100">
+                <!-- Card lengkapi data diri -->
                 <div class="card border-info">
                     <div class="card-header">
                         <h5 class="float-left mb-0">Data Diri</h5>
@@ -127,7 +139,9 @@
                     </div>
 
                     <div class="card-body">
+                        <!-- Form untuk melengkapi data diri -->
                         <form action="/renter/save/<?= $account['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+                            <!-- Melindungi web dari serangan CSRF(Cross-Site Request Forgery) -->
                             <?= csrf_field(); ?>
 
                             <input type="hidden" name="old-ktp-image" value="<?= $account['ktp_image']; ?>">

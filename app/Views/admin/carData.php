@@ -1,9 +1,12 @@
+<!-- Menggunakan template user -->
 <?= $this->extend('layout/user_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <!-- Main Content -->
 <div id="content">
 
+    <!-- Menggunakan topbar admin -->
     <?= $this->include('layout/topbarAdmin'); ?>
 
     <!-- Begin Page Content -->
@@ -20,6 +23,7 @@
             Tambah data mobil
         </a>
 
+        <!-- Menampilkan pesan berhasil ketika berhasil menambah, mengubah atau menghapus data mobil -->
         <?php if (session()->getFlashdata('successMessage')) : ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= session()->getFlashdata('successMessage'); ?>
@@ -30,6 +34,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Menampilkan data mobil -->
         <div class="row row-cols-1 row-cols-md-3">
             <?php foreach ($car as $car) : ?>
                 <div class="col mb-4">

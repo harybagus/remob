@@ -1,9 +1,12 @@
+<!-- Menggunakan template user -->
 <?= $this->extend('layout/user_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <!-- Main Content -->
 <div id="content">
 
+    <!-- Menggunakan topbar admin -->
     <?= $this->include('layout/topbarAdmin'); ?>
 
     <!-- Begin Page Content -->
@@ -12,6 +15,7 @@
         <!-- Page Heading -->
         <h3 class="mb-4 text-gray-800"><?= $title; ?></h3>
 
+        <!-- Menampilkan pesan berhasil ketika berhasil mengembalikan mobil -->
         <?php if (session()->getFlashdata('successMessage')) : ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?= session()->getFlashdata('successMessage'); ?>
@@ -22,6 +26,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Menampilkan data penyewaan -->
         <table class="table table-striped table-hover">
             <thead class="">
                 <tr>
@@ -41,11 +46,17 @@
                 <?php $i = 1; ?>
                 <?php foreach ($rental as $rental) : ?>
                     <?php
+                    // Koneksi ke database.
                     $db = db_connect();
+
+                    // Membuat query mengambil data mobil berdasarkan id mobil di table rental.
                     $queryCar = "SELECT * FROM `car` WHERE `id` = ?";
+                    // Membuat query mengambil data penyewa berdasarkan id penyewa di table rental.
                     $queryRenter = "SELECT * FROM `renter` WHERE `id` = ?";
 
+                    // Mengambil data mobil.
                     $car = $db->query($queryCar, $rental['car_id'])->getRowArray();
+                    // Mengambil data penyewa.
                     $renter = $db->query($queryRenter, $rental['renter_id'])->getRowArray();
                     ?>
                     <tr>

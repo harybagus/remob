@@ -1,9 +1,12 @@
+<!-- Menggunakan template user -->
 <?= $this->extend('layout/user_template'); ?>
 
+<!-- Membuat halaman ini menjadi section content -->
 <?= $this->section('content'); ?>
 <!-- Main Content -->
 <div id="content">
 
+    <!-- Menggunakan topbar admin -->
     <?= $this->include('layout/topbarAdmin'); ?>
 
     <!-- Begin Page Content -->
@@ -14,6 +17,7 @@
 
         <div class="dropdown-divider mb-3"></div>
 
+        <!-- Menampilkan error ketika tidak lolos validasi -->
         <?php if (session()->getFlashdata('_ci_validation_errors')) : ?>
             <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
@@ -32,6 +36,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Menampilkan pesan error ketika tidak lolos validasi -->
         <?php if (session()->getFlashdata('errorMessage')) : ?>
             <div class="col-sm-7 alert alert-danger alert-dismissible fade show" role="alert">
                 <h4>Kesalahan</h4>
@@ -49,16 +54,23 @@
         <?php endif; ?>
 
         <?php
+        // Koneksi ke database.
         $db = db_connect();
 
+        // Membuat query mengambil data mobil berdasarkan id mobil di table rental.
         $queryCar = "SELECT * FROM `car` WHERE `id` = ?";
+        // Membuat query mengambil data penyewa berdasarkan id penyewa di table rental.
         $queryRenter = "SELECT * FROM `renter` WHERE `id` = ?";
 
+        // Mengambil data mobil.
         $car = $db->query($queryCar, $rental['car_id'])->getRowArray();
+        // Mengambil data penyewa.
         $renter = $db->query($queryRenter, $rental['renter_id'])->getRowArray();
         ?>
 
+        <!-- Form untuk mengembalikan mobil -->
         <form action="/admin/return/<?= $rental['id']; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+            <!-- Melindungi web dari serangan CSRF(Cross-Site Request Forgery) -->
             <?= csrf_field(); ?>
 
             <input type="hidden" name="renter-id" value="<?= $rental['renter_id']; ?>">

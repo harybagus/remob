@@ -4,6 +4,8 @@ use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
+ * 
+ * Menentukan url dan method yang akan digunakan.
  */
 $routes->get('/auth', 'Auth::index');
 $routes->get('/auth/registration', 'Auth::registration');
