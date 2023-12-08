@@ -25,9 +25,10 @@ Berikut teknologi yang kami gunakan untuk membuat website ini:
 ## Instalasi
 1. Clone repository ini ke dalam folder htdocs.
 2. Buka XAMPP lalu jalankan Apache dan MySQL.
-3. Import database remob.sql ke MySQL
-4. Buka git bash lalu ketikkan `php spark serve`
-5. Buka browser favorit Anda lalu ketikkan `localhost:8080/auth`
+3. Import database `remob.sql` ke MySQL.
+4. Ubah file `.env_example` menjadi `.env`
+5. Buka git bash lalu ketikkan `php spark serve`
+6. Buka browser favorit Anda lalu ketikkan `localhost:8080/auth`
 
 ## Akun
 1. Admin
