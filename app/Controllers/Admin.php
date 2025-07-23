@@ -13,6 +13,7 @@ class Admin extends BaseController
     protected $renterAccountModel;
     protected $carModel;
     protected $rentalModel;
+    protected $db;
 
     public function __construct()
     {
@@ -21,7 +22,20 @@ class Admin extends BaseController
         $this->renterAccountModel = new RenterAccountModel();
         $this->carModel = new CarModel();
         $this->rentalModel = new RentalModel();
+        $this->db = \Config\Database::connect();
     }
+
+    public function getDashboardSummary()
+    {
+        return $this->db->query(" 
+            SELECT
+            (SELECT COUNT(*) FROM car) AS car,
+            (SELECT COUNT(*) FROM renter) AS renterAccount,
+            (SELECT COUNT(*) FROM rental) AS rental,
+            (SELECT COUNT(*) FROM admin) AS adminAccount
+        ")->getRowArray();
+    }
+
 
     public function index()
     {
@@ -33,13 +47,24 @@ class Admin extends BaseController
          * Mengambil jumlah data penyewaan.
          * Mengambil jumlah data akun admin.
          */
+        // $data = [
+        //     'title' => 'Dashboard',
+        //     'account' => $this->adminAccountModel->getAccount(session()->get('email')),
+        //     'car' => $this->carModel->getNumberOfCars(),
+        //     'renterAccount' => $this->renterAccountModel->getNumberOfRenters(),
+        //     'rental' => $this->rentalModel->getNumberOfRentals(),
+        //     'adminAccount' => $this->adminAccountModel->getNumberOfAdmins(),
+        // ];
+
+        $summary = $this->getDashboardSummary();
+
         $data = [
             'title' => 'Dashboard',
             'account' => $this->adminAccountModel->getAccount(session()->get('email')),
-            'car' => $this->carModel->getNumberOfCars(),
-            'renterAccount' => $this->renterAccountModel->getNumberOfRenters(),
-            'rental' => $this->rentalModel->getNumberOfRentals(),
-            'adminAccount' => $this->adminAccountModel->getNumberOfAdmins(),
+            'car' => $summary['car'],
+            'renterAccount' => $summary['renterAccount'],
+            'rental' => $summary['rental'],
+            'adminAccount' => $summary['adminAccount'],
         ];
 
         // Mengarahkan tampilan ke file dashboard di folder admin, serta mengirim data.
