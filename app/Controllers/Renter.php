@@ -127,10 +127,13 @@ class Renter extends BaseController
             // Lalu pindahkan file gambar yang diinput ke dalam folder profile.
             $image->move('assets/img/profile', $imageName);
 
-            // Cek apakah nama gambar lama bukan defualt.jpg.
-            if ($this->request->getVar('old-image') != 'default.jpg') {
-                // Jika iya, maka hapus file gambar di folder profile berdasarkan nama gambar lama.
-                unlink('assets/img/profile/' . $this->request->getVar('old-image'));
+            $oldImageName = $this->request->getVar('old-image');
+            $oldImagePath = 'assets/img/profile/' . $oldImageName;
+
+            // Pengecualian: penggunaan unlink() secara langsung diperbolehkan
+            // karena hanya satu baris dan konteks penghapusan file sangat sederhana.
+            if ($oldImageName !== 'default.jpg' && file_exists($oldImagePath)) {
+                unlink($oldImagePath);
             }
         }
 
@@ -296,6 +299,11 @@ class Renter extends BaseController
         $addBalance = $this->request->getVar('add-balance');
         $addBalance = str_replace('Rp', '', $addBalance);
         $addBalance = str_replace('.', '', $addBalance);
+
+        if (!is_numeric($currentBalance) || !is_numeric($addBalance)) {
+            session()->setFlashdata('errorMessage', 'Input saldo tidak valid.');
+            return redirect()->to(base_url('renter'))->withInput();
+        }
 
         // Tambahkan saldo saat ini dengan saldo yang diinputkan.
         $balance = $currentBalance + $addBalance;
